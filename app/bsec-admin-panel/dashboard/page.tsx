@@ -96,7 +96,7 @@ export default function AdminDashboardPage() {
 
       {/* Floating Action Button (+ FAB) */}
       <button
-        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-blue-600 hover:bg-blue-700 text-white flex items-center justify-center shadow-lg shadow-blue-600/40 hover:scale-105 active:scale-95 transition-all duration-200 z-50"
+        className="fixed bottom-6 right-6 w-12 h-12 rounded-full bg-[#364FAB] hover:bg-[#2b3e8c] text-white flex items-center justify-center shadow-lg shadow-[#364FAB]/40 hover:scale-105 active:scale-95 transition-all duration-200 z-50 cursor-pointer"
         title="Add New Record"
       >
         <Plus className="w-6 h-6 stroke-[2.5]" />
