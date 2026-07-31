@@ -1,39 +1,36 @@
 import React from 'react'
+import { AboutCmsContent } from '@/app/bsec-admin-panel/cms/types'
 
-const About = () => {
-  const vision = "Menjadi pusat bimbingan belajar terdepan yang mencetak generasi unggul dan berprestasi di Indonesia."
+interface AboutProps {
+  data?: AboutCmsContent
+}
+
+const About: React.FC<AboutProps> = ({ data }) => {
+  const title = data?.title || 'Tentang BSEC'
+  const subtitle = data?.subtitle || 'Bimbingan belajar profesional yang berkomitmen mencetak generasi unggul'
+  const paragraph1 = data?.descriptionParagraph1 || 'BSEC (Brown Smart Education Center) hadir sebagai solusi pendidikan terpercaya bagi siswa SD, SMP, dan SMA di Indonesia. Dengan metode pembelajaran yang terstruktur dan mentor berpengalaman, kami membantu siswa meraih prestasi akademik terbaik.'
+  const paragraph2 = data?.descriptionParagraph2 || 'Didirikan pada tahun 2014, BSEC telah membantu lebih dari 500 siswa mencapai target akademik mereka, termasuk lolos ke PTN favorit melalui jalur SNBT.'
+  const vision = data?.visionText || 'Menjadi pusat bimbingan belajar terdepan yang mencetak generasi unggul dan berprestasi di Indonesia.'
   
-  const mission = [
-    "Menyediakan pendidikan berkualitas dengan metode pembelajaran inovatif",
-    "Mengembangkan potensi akademik dan karakter siswa secara optimal",
-    "Menciptakan lingkungan belajar yang nyaman dan menyenangkan",
-    "Membantu siswa meraih prestasi tertinggi dalam setiap jenjang pendidikan",
+  const mission = data?.missions || [
+    'Menyediakan pendidikan berkualitas dengan metode pembelajaran inovatif',
+    'Mengembangkan potensi akademik dan karakter siswa secara optimal',
+    'Menciptakan lingkungan belajar yang nyaman dan menyenangkan',
+    'Membantu siswa meraih prestasi tertinggi dalam setiap jenjang pendidikan',
   ]
 
-  const highlights = [
-    {
-      icon: "school",
-      number: "10+",
-      label: "Tahun Pengalaman",
-    },
-    {
-      icon: "groups",
-      number: "500+",
-      label: "Siswa Berprestasi",
-    },
-    {
-      icon: "star",
-      number: "95%",
-      label: "Kepuasan Siswa",
-    },
+  const highlights = data?.highlights || [
+    { icon: 'school', number: '10+', label: 'Tahun Pengalaman' },
+    { icon: 'groups', number: '500+', label: 'Siswa Berprestasi' },
+    { icon: 'star', number: '95%', label: 'Kepuasan Siswa' },
   ]
 
   return (
     <section className="py-24 bg-white" id="tentang">
       <div className="max-w-[1280px] mx-auto px-6">
         <div className="text-center mb-16">
-          <h2 className="font-headline-lg text-3xl md:text-4xl text-primary font-bold mb-2">Tentang BSEC</h2>
-          <p className="font-body-lg text-lg text-on-surface-variant">Bimbingan belajar profesional yang berkomitmen mencetak generasi unggul</p>
+          <h2 className="font-headline-lg text-3xl md:text-4xl text-primary font-bold mb-2">{title}</h2>
+          <p className="font-body-lg text-lg text-on-surface-variant">{subtitle}</p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -48,15 +45,10 @@ const About = () => {
           {/* Right - Description */}
           <div className="space-y-6">
             <p className="font-body-md text-lg text-on-surface-variant leading-relaxed">
-              <span className="font-bold text-primary">BSEC (Brown Smart Education Center)</span> hadir sebagai solusi pendidikan 
-              terpercaya bagi siswa SD, SMP, dan SMA di Indonesia. Dengan metode 
-              pembelajaran yang terstruktur dan mentor berpengalaman, kami membantu 
-              siswa meraih prestasi akademik terbaik.
+              {paragraph1}
             </p>
             <p className="font-body-md text-lg text-on-surface-variant leading-relaxed">
-              Didirikan pada tahun 2014, BSEC telah membantu lebih dari 500 siswa 
-              mencapai target akademik mereka, termasuk lolos ke PTN favorit melalui 
-              jalur SNBT.
+              {paragraph2}
             </p>
 
             {/* Highlights */}
