@@ -3,6 +3,7 @@ export type CmsTab =
   | 'Programs'
   | 'Testimonials'
   | 'About & Advantages'
+  | 'Lead Capture CTA'
   | 'Footer & Contact';
 
 export type DevicePreviewMode = 'desktop' | 'tablet' | 'mobile';
@@ -18,17 +19,25 @@ export interface HeroSectionContent {
   assetFileName: string;
   assetHint: string;
   assetMediaUrl: string;
+  floatingBadgeText?: string;
+  floatingBadgeSubtext?: string;
   isVisible: boolean;
+}
+
+export interface ProgramCategory {
+  id: string;
+  name: string;
+  sortOrder: number;
 }
 
 export interface ProgramCmsItem {
   id: string;
-  category: 'sd' | 'smp' | 'sma' | 'utbk';
+  categoryId: string;
   title: string;
   description: string;
   priceFormatted: string;
   iconName: string;
-  targetAge: string;
+  targetAge?: string;
   isActive: boolean;
   sortOrder: number;
 }
@@ -59,6 +68,14 @@ export interface AboutCmsContent {
   visionText: string;
   missions: string[];
   highlights: HighlightMetric[];
+  statCard1Number?: string;
+  statCard1Label?: string;
+  statCard2Number?: string;
+  statCard2Label?: string;
+  statCard3Number?: string;
+  statCard3Label?: string;
+  statCard4Number?: string;
+  statCard4Label?: string;
 }
 
 export interface AdvantageCmsItem {
@@ -67,6 +84,12 @@ export interface AdvantageCmsItem {
   title: string;
   description: string;
   sortOrder: number;
+}
+
+export interface LeadCaptureCmsContent {
+  title: string;
+  subtitle: string;
+  checklistItems: string[];
 }
 
 export interface FooterCmsContent {
@@ -84,9 +107,16 @@ export interface FooterCmsContent {
 
 export interface FullLandingPageData {
   hero: HeroSectionContent;
+  programCategories: ProgramCategory[];
   programs: ProgramCmsItem[];
   testimonials: TestimonialRosterItem[];
   about: AboutCmsContent;
   advantages: AdvantageCmsItem[];
+  leadCapture?: LeadCaptureCmsContent;
   footer: FooterCmsContent;
+  advantagesTitle?: string;
+  advantagesSubtitle?: string;
+  programsTitle?: string;
+  programsSubtitle?: string;
+  testimonialsTitle?: string;
 }
