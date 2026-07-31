@@ -13,44 +13,56 @@ const Footer: React.FC<FooterProps> = ({ data }) => {
   const email = data?.companyEmail || 'info@bsec.com'
 
   return (
-    <footer className="bg-surface-container-highest w-full py-16 border-t border-outline-variant mt-20" id="kontak">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 md:px-[64px] max-w-[1280px] mx-auto">
+    <footer className="bg-white w-full py-16 border-t border-gray-200 mt-20" id="kontak">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-8 px-6 max-w-[1280px] mx-auto">
         <div className="col-span-1 md:col-span-1">
-          <div className="text-headline-md font-headline-md font-bold text-primary mb-4">BSEC</div>
-          <p className="text-on-surface-variant font-body-md text-base leading-relaxed">{aboutText}</p>
+          <div className="text-2xl font-black text-[#1D4ED8] tracking-tight mb-4 flex items-center gap-2">
+            <span className="bg-[#1D4ED8] text-white px-2 py-0.5 rounded-lg text-lg">B</span>SEC
+          </div>
+          <p className="text-gray-500 text-xs leading-relaxed font-medium">{aboutText}</p>
         </div>
         <div>
-          <h4 className="font-headline-md text-xl font-bold text-primary mb-4">Program</h4>
-          <ul className="space-y-3">
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#program">Program SD</Link></li>
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#program">Program SMP</Link></li>
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#program">Program SMA</Link></li>
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#program">UTBK Khusus</Link></li>
+          <h4 className="font-extrabold text-sm text-[#1E293B] uppercase tracking-wider mb-4">Program</h4>
+          <ul className="space-y-2.5">
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#programs">Program SD</Link></li>
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#programs">Program SMP</Link></li>
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#programs">Program SMA</Link></li>
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#programs">Intensif UTBK/SNBT</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-headline-md text-xl font-bold text-primary mb-4">Perusahaan</h4>
-          <ul className="space-y-3">
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#tentang">Tentang Kami</Link></li>
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#keunggulan">Keunggulan</Link></li>
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#testimoni">Testimoni</Link></li>
-            <li><Link className="text-on-surface-variant hover:text-primary transition-colors font-label-md text-sm" href="#kontak">Kontak</Link></li>
+          <h4 className="font-extrabold text-sm text-[#1E293B] uppercase tracking-wider mb-4">Perusahaan</h4>
+          <ul className="space-y-2.5">
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#tentang">Tentang Kami</Link></li>
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#keunggulan">Keunggulan</Link></li>
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#testimonials">Testimoni</Link></li>
+            <li><Link className="text-xs font-semibold text-gray-500 hover:text-[#1D4ED8] transition-colors" href="#kontak">Kontak</Link></li>
           </ul>
         </div>
         <div>
-          <h4 className="font-headline-md text-xl font-bold text-primary mb-4">Hubungi Kami</h4>
-          <p className="text-on-surface-variant font-body-md text-base mb-2 leading-relaxed">{address}</p>
-          <p className="text-on-surface-variant font-label-md text-sm mb-1">Telp: {phone}</p>
-          <p className="text-on-surface-variant font-label-md text-sm mb-4">Email: {email}</p>
-          <div className="flex gap-4">
-            <a className="text-primary hover:scale-110 transition-transform bg-primary/10 p-2 rounded-full flex items-center justify-center" href="#"><span className="material-symbols-outlined text-[20px]">public</span></a>
-            <a className="text-primary hover:scale-110 transition-transform bg-primary/10 p-2 rounded-full flex items-center justify-center" href={`mailto:${email}`}><span className="material-symbols-outlined text-[20px]">mail</span></a>
-            <a className="text-primary hover:scale-110 transition-transform bg-primary/10 p-2 rounded-full flex items-center justify-center" href={`tel:${phone}`}><span className="material-symbols-outlined text-[20px]">call</span></a>
+          <h4 className="font-extrabold text-sm text-[#1E293B] uppercase tracking-wider mb-4">Hubungi Kami</h4>
+          <p className="text-xs text-gray-500 mb-2 leading-relaxed font-medium">{address}</p>
+          <p className="text-xs text-gray-500 mb-1 font-medium">Telp: {phone}</p>
+          <p className="text-xs text-gray-500 mb-4 font-medium">Email: {email}</p>
+          <div className="flex gap-3">
+            <a className="text-[#1D4ED8] hover:scale-110 transition-transform bg-[#EFF6FF] p-2 rounded-xl flex items-center justify-center" href="#">
+              <span className="material-symbols-outlined text-[18px]">public</span>
+            </a>
+            <a className="text-[#1D4ED8] hover:scale-110 transition-transform bg-[#EFF6FF] p-2 rounded-xl flex items-center justify-center" href={`mailto:${email}`}>
+              <span className="material-symbols-outlined text-[18px]">mail</span>
+            </a>
+            <a className="text-[#1D4ED8] hover:scale-110 transition-transform bg-[#EFF6FF] p-2 rounded-xl flex items-center justify-center" href={`tel:${phone}`}>
+              <span className="material-symbols-outlined text-[18px]">call</span>
+            </a>
           </div>
         </div>
       </div>
-      <div className="max-w-[1280px] mx-auto px-6 md:px-[64px] mt-16 pt-6 border-t border-outline-variant/30 text-center">
-        <p className="text-on-surface-variant font-label-md text-sm">© {new Date().getFullYear()} Brown Smart Education Center. All rights reserved.</p>
+      <div className="max-w-[1280px] mx-auto px-6 mt-12 pt-6 border-t border-gray-100 flex flex-col sm:flex-row items-center justify-between text-xs font-semibold text-gray-400 gap-2">
+        <p>© {new Date().getFullYear()} Brown Smart Education Center. All rights reserved.</p>
+        <div className="flex gap-6">
+          <Link href="#" className="hover:text-[#1D4ED8] transition-colors">PRIVACY POLICY</Link>
+          <Link href="#" className="hover:text-[#1D4ED8] transition-colors">TERMS OF SERVICE</Link>
+        </div>
       </div>
     </footer>
   )
