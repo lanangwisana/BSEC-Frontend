@@ -1,6 +1,11 @@
 import React from 'react'
+import { TestimonialRosterItem } from '@/app/bsec-admin-panel/cms/types'
 
-const testimonialsData = [
+interface TestimonialsProps {
+  data?: TestimonialRosterItem[]
+}
+
+const defaultTestimonials = [
   {
     name: 'Annisa Rahma',
     role: 'Lolos Kedokteran UI',
@@ -21,14 +26,27 @@ const testimonialsData = [
   }
 ]
 
-const Testimonials = () => {
+const Testimonials: React.FC<TestimonialsProps> = ({ data }) => {
+  const activeDynamicItems = data
+    ? data.filter((item) => item.isActive)
+    : []
+
+  const currentDisplayList = activeDynamicItems.length > 0
+    ? activeDynamicItems.map((item) => ({
+        name: item.studentName,
+        role: `${item.targetPtnPassed} (${item.studentClass})`,
+        content: item.contentSnippet,
+        avatar: item.avatarUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSsQeRbpozxTto5SMsu1B0JGDl3CbMkrKaH_eJlbNLmg2glQYGHU_X1e4zm9h_FWwKIE_FErsVAV8eBDc_RZ4X1Tu5jbKZ2MXEDh8shGUGQ5VePhJE54ht0pxE3EXhhhle5gejR7W6Nmx5qyvr3Y3LS2Re7h0I3STGO-baDFWqJOFWtKrfF_HIqKd0Av8NKnWdxpC29WaaN4y6xk2BxuZQSEwFTRO8I-YPowIZ3k9xv9N3_jSSlIH8',
+      }))
+    : defaultTestimonials
+
   return (
     <section className="py-24 bg-surface-container-low" id="testimoni">
       <div className="max-w-[1280px] mx-auto px-6">
         <h2 className="font-headline-lg text-3xl md:text-4xl text-primary text-center mb-16 font-bold">Kisah Sukses Siswa</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {testimonialsData.map((item, index) => (
+          {currentDisplayList.map((item, index) => (
             <div key={index} className="bg-surface-container-lowest p-6 rounded-2xl shadow-sm border border-outline-variant/30 flex flex-col hover:shadow-md transition-shadow">
               <div className="flex items-center gap-4 mb-4">
                 <img 
