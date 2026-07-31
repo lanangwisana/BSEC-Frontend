@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { FullLandingPageData } from '../../bsec-admin-panel/cms/types';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api';
+
 export function useLandingPageData() {
   const [data, setData] = useState<FullLandingPageData>({
     hero: {
@@ -43,7 +45,7 @@ export function useLandingPageData() {
         avatarInitials: 'AR',
         targetPtnPassed: 'UI - Kedokteran',
         contentSnippet: '"Berkat BSEC, materi UTBK yang tadinya terasa mustahil jadi lebih mudah dipahami. Strategi belajarnya sangat aplikatif dan tentornya asyik diajak diskusi."',
-        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCSsQeRbpozxTto5SMsu1B0JGDl3CbMkrKaH_eJlbNLmg2glQYGHU_X1e4zm9h_FWwKIE_FErsVAV8eBDc_RZ4X1Tu5jbKZ2MXEDh8shGUGQ5VePhJE54ht0pxE3EXhhhle5gejR7W6Nmx5qyvr3Y3LS2Re7h0I3STGO-baDFWqJOFWtKrfF_HIqKd0Av8NKnWdxpC29WaaN4y6xk2BxuZQSEwFTRO8I-YPowIZ3k9xv9N3_jSSlIH8',
+        avatarUrl: '/images/image 2.png',
         isActive: true,
       },
       {
@@ -54,7 +56,7 @@ export function useLandingPageData() {
         avatarInitials: 'BS',
         targetPtnPassed: 'ITB - STEI',
         contentSnippet: '"Metode belajar interaktif di BSEC benar-benar mengubah cara pandang saya terhadap Matematika. Sekarang nilai saya stabil di atas 90."',
-        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDEZDkY6Vp2nfBJEgsFr85y7hUYoFvaY0WLHfjbmtd6iiDCzyROX6hjWrvCPEArkDfByuGYoUgVOv5N8-rBeezXDgLbQ5Z60_QFACNYJ0gwTNoKpPy8yHLbyR5ewvABRoFhf1Raxst_ERIlj8Sp35DNa1wN--RW4zcVXK5ZGiDLz2Hsqt6RuCtdV47zRPyTMjN44JFXPj_rdS_OtqZBY-aWydDA3EvHKaSXVVMPueb94AC3iJh8ZjoN',
+        avatarUrl: '/images/image 3.png',
         isActive: true,
       },
       {
@@ -65,7 +67,7 @@ export function useLandingPageData() {
         avatarInitials: 'CL',
         targetPtnPassed: 'UGM - Teknik Sipil',
         contentSnippet: '"Tentor di BSEC bukan sekadar pengajar, tapi mentor. Mereka sangat peduli dengan progres setiap siswa. Sangat merekomendasikan bimbel ini!"',
-        avatarUrl: 'https://lh3.googleusercontent.com/aida-public/AB6AXuB5AZ2zse8ELDpke3UhZlRgYbtNriUKgGxTXrE7JNAereVBJ0bdwZDMD_kfC3icgWva2ja4xhwiqyxVe6oT-JDG-qlZ8sTUu99QoTEB2YHUZCQeY-1JWm3iLZXwMrSpFuDRTHTBg89y5SXunohc37wTW5lQJNGoe1hOmuIT1B6sjbjDL2KTgFVsncrUw78ua9K_J6-Iu9PGetFfXfcvOi53IHpaEgCnj7XfvhjCT8ZQOnMylgpbrI57',
+        avatarUrl: '/images/image 1.png',
         isActive: true,
       },
     ],
@@ -116,9 +118,10 @@ export function useLandingPageData() {
     async function fetchLandingPageData() {
       setLoading(true);
       try {
-        const res = await fetch('/api/landing-page');
+        const res = await fetch(`${API_BASE_URL}/landing-page`);
         if (res.ok) {
-          const json = await res.json();
+          const resJson = await res.json();
+          const json = resJson.data || resJson;
           setData(json);
         }
       } catch (err) {
