@@ -1,38 +1,58 @@
 import React from 'react'
+import { LeadCaptureCmsContent } from '@/app/bsec-admin-panel/cms/types'
 
-const CTA = () => {
+interface CTAProps {
+  data?: LeadCaptureCmsContent
+}
+
+const CTA: React.FC<CTAProps> = ({ data }) => {
+  const title = data?.title || 'Mulai Perjalanan Prestasimu Sekarang'
+  const subtitle = data?.subtitle || 'Dapatkan jadwal konsultasi gratis dan rancang strategi belajar terbaik bersama tim ahli kami.'
+  const checklist = data?.checklistItems || [
+    'Tes Diagnostik Kemampuan Gratis',
+    'Laporan Progres Belajar Real-time',
+    'Akses Bank Soal Terlengkap',
+  ]
+
   return (
-    <section className="py-24" id="daftar">
+    <section className="py-24 relative" id="daftar">
       <div className="max-w-[1280px] mx-auto px-6">
-        <div className="bg-primary overflow-hidden rounded-[32px] shadow-2xl flex flex-col md:flex-row items-stretch">
-          <div className="md:w-1/2 p-12 flex flex-col justify-center text-white">
-            <h2 className="font-display-lg text-4xl md:text-5xl font-extrabold mb-6 leading-tight">Mulai Perjalanan Prestasimu Sekarang</h2>
-            <p className="font-body-lg text-lg opacity-90 mb-8">Dapatkan jadwal konsultasi gratis dan rancang strategi belajar terbaik bersama tim ahli kami.</p>
+        <div className="bg-white border border-gray-200 overflow-hidden rounded-[48px] shadow-2xl flex flex-col md:flex-row items-stretch">
+          <div className="md:w-1/2 p-10 md:p-14 flex flex-col justify-center bg-[#1D4ED8] text-white relative">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black mb-6 leading-tight">
+              {title}
+            </h2>
+            <p className="text-lg opacity-90 mb-8 leading-relaxed font-medium">
+              {subtitle}
+            </p>
             <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-fixed">check_circle</span>
-                <span className="font-semibold">Tes Diagnostik Kemampuan Gratis</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-fixed">check_circle</span>
-                <span className="font-semibold">Laporan Progres Belajar Real-time</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <span className="material-symbols-outlined text-secondary-fixed">check_circle</span>
-                <span className="font-semibold">Akses Bank Soal Terlengkap</span>
-              </div>
+              {checklist.map((item, idx) => (
+                <div key={idx} className="flex items-center gap-4 bg-white/10 p-4 rounded-2xl">
+                  <span className="material-symbols-outlined text-[#1D4ED8] p-2 bg-white rounded-xl text-xl">check_circle</span>
+                  <span className="font-bold text-sm">{item}</span>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="md:w-1/2 p-12 bg-white/5 backdrop-blur-sm flex items-center">
-            <div className="bg-white p-8 rounded-2xl w-full shadow-lg">
-              <form className="space-y-6">
+
+          <div className="md:w-1/2 p-10 md:p-14 flex items-center bg-white">
+            <div className="w-full">
+              <form className="space-y-5">
                 <div>
-                  <label className="block text-sm font-semibold text-primary mb-2">Nama Lengkap</label>
-                  <input className="w-full border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary px-4 py-3 outline-none text-primary" placeholder="Masukkan nama Anda" type="text"/>
+                  <label className="block text-xs font-black text-[#1E293B] mb-2 uppercase tracking-widest">
+                    Nama Lengkap
+                  </label>
+                  <input 
+                    className="w-full border-2 border-gray-200 rounded-2xl focus:ring-[#1D4ED8] focus:border-[#1D4ED8] px-5 py-3.5 bg-[#EFF6FF]/70 text-xs font-semibold text-[#1E293B] transition-all" 
+                    placeholder="Masukkan nama Anda" 
+                    type="text"
+                  />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-primary mb-2">Jenjang Pendidikan</label>
-                  <select className="w-full border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary px-4 py-3 outline-none bg-white text-primary">
+                  <label className="block text-xs font-black text-[#1E293B] mb-2 uppercase tracking-widest">
+                    Jenjang Pendidikan
+                  </label>
+                  <select className="w-full border-2 border-gray-200 rounded-2xl focus:ring-[#1D4ED8] focus:border-[#1D4ED8] px-5 py-3.5 bg-[#EFF6FF]/70 text-xs font-semibold text-[#1E293B] transition-all">
                     <option>SD</option>
                     <option>SMP</option>
                     <option>SMA</option>
@@ -40,13 +60,24 @@ const CTA = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-primary mb-2">No. WhatsApp</label>
-                  <input className="w-full border border-outline-variant rounded-xl focus:ring-2 focus:ring-primary focus:border-primary px-4 py-3 outline-none text-primary" placeholder="081234567XXX" type="tel"/>
+                  <label className="block text-xs font-black text-[#1E293B] mb-2 uppercase tracking-widest">
+                    No. WhatsApp
+                  </label>
+                  <input 
+                    className="w-full border-2 border-gray-200 rounded-2xl focus:ring-[#1D4ED8] focus:border-[#1D4ED8] px-5 py-3.5 bg-[#EFF6FF]/70 text-xs font-semibold text-[#1E293B] transition-all" 
+                    placeholder="081234567XXX" 
+                    type="tel"
+                  />
                 </div>
-                <button className="w-full bg-primary text-white py-4 rounded-xl font-bold text-lg hover:brightness-110 shadow-md transition-all active:scale-95 mt-4" type="button">
-                  Daftar Sekarang
+                <button 
+                  className="w-full bg-[#1D4ED8] hover:bg-[#1e40af] text-white py-4 rounded-2xl font-black text-sm shadow-xl shadow-[#1D4ED8]/30 transition-all active:scale-95 mt-2 cursor-pointer" 
+                  type="button"
+                >
+                  DAFTAR SEKARANG
                 </button>
-                <p className="text-center text-xs text-on-surface-variant mt-4 font-semibold">Kami menjamin privasi data Anda.</p>
+                <p className="text-center text-[11px] text-gray-400 mt-3 font-semibold">
+                  Kami menjamin privasi data Anda.
+                </p>
               </form>
             </div>
           </div>
