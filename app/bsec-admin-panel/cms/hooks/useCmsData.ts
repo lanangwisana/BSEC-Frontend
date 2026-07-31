@@ -309,20 +309,27 @@ export function useCmsData() {
     try {
       const res = await fetch(`${API_BASE_URL}/admin/cms/publish`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
         body: JSON.stringify(payload),
       });
 
       if (res.ok) {
         setPublishStatus('Success! CMS changes published to PostgreSQL.');
       } else {
-        setPublishStatus('Error saving to server.');
+        const errData = await res.json().catch(() => ({}));
+        const errMsg = errData?.message || errData?.error || `HTTP ${res.status}`;
+        setPublishStatus(`Error: ${errMsg}`);
+        console.error('[Publish] Server error:', errData);
       }
     } catch (err) {
       setPublishStatus('Connection error to Laravel API.');
+      console.error('[Publish] Network error:', err);
     } finally {
       setIsPublishing(false);
-      setTimeout(() => setPublishStatus(null), 4000);
+      setTimeout(() => setPublishStatus(null), 6000);
     }
   };
 
