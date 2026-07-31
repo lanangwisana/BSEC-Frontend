@@ -14,6 +14,8 @@ import {
   FooterCmsContent,
 } from '../types';
 
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api';
+
 export function useCmsData() {
   const [activeTab, setActiveTab] = useState<CmsTab>('Hero Banner');
   const [deviceMode, setDeviceMode] = useState<DevicePreviewMode>('desktop');
@@ -166,13 +168,14 @@ export function useCmsData() {
     },
   });
 
-  // Fetch API Endpoint
+  // Fetch API Endpoint from Laravel Backend
   useEffect(() => {
     async function fetchCmsSections() {
       try {
-        const res = await fetch('/api/admin/cms/sections');
+        const res = await fetch(`${API_BASE_URL}/admin/cms/sections`);
         if (res.ok) {
-          const json = await res.json();
+          const resJson = await res.json();
+          const json = resJson.data || resJson;
           if (json.hero) setHeroForm((prev) => ({ ...prev, ...json.hero }));
           if (json.programCategories) setProgramCategories(json.programCategories);
           if (json.programs) setPrograms(json.programs);
@@ -282,7 +285,7 @@ export function useCmsData() {
     setAdvantages((prev) => prev.filter((a) => a.id !== id));
   };
 
-  // Save / Publish All CMS Draft Changes
+  // Save / Publish All CMS Draft Changes to Laravel Backend
   const handlePublishChanges = async () => {
     setIsPublishing(true);
     setPublishStatus(null);
@@ -304,19 +307,19 @@ export function useCmsData() {
     };
 
     try {
-      const res = await fetch('/api/admin/cms/publish', {
+      const res = await fetch(`${API_BASE_URL}/admin/cms/publish`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),
       });
 
       if (res.ok) {
-        setPublishStatus('Success! CMS changes published live.');
+        setPublishStatus('Success! CMS changes published to PostgreSQL.');
       } else {
-        setPublishStatus('Draft saved locally.');
+        setPublishStatus('Error saving to server.');
       }
     } catch (err) {
-      setPublishStatus('Draft saved in local state.');
+      setPublishStatus('Connection error to Laravel API.');
     } finally {
       setIsPublishing(false);
       setTimeout(() => setPublishStatus(null), 4000);
