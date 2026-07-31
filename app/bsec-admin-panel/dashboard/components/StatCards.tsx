@@ -15,10 +15,10 @@ export function StatCards({ metrics }: StatCardsProps) {
       <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
         <div>
           <div className="flex items-center justify-between mb-4">
-            <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600">
+            <div className="w-10 h-10 rounded-xl bg-[#F0F4F8] flex items-center justify-center text-[#364FAB]">
               <Users className="w-5 h-5" />
             </div>
-            <span className="text-[11px] font-bold text-blue-600 bg-blue-50/80 px-2.5 py-1 rounded-full">
+            <span className="text-[11px] font-bold text-[#364FAB] bg-[#F0F4F8] px-2.5 py-1 rounded-full">
               +{metrics.momGrowth}% MoM
             </span>
           </div>
@@ -26,7 +26,7 @@ export function StatCards({ metrics }: StatCardsProps) {
           <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">
             Total Active Students
           </p>
-          <p className="text-3xl font-extrabold text-gray-900 tracking-tight">
+          <p className="text-3xl font-extrabold text-[#2B2D42] tracking-tight">
             {metrics.totalActiveStudents.toLocaleString('id-ID')}
           </p>
         </div>
@@ -35,19 +35,19 @@ export function StatCards({ metrics }: StatCardsProps) {
         <div className="mt-5 pt-3 border-t border-gray-100 grid grid-cols-4 text-center divide-x divide-gray-100">
           <div>
             <span className="block text-[10px] font-bold text-gray-400">SD</span>
-            <span className="block text-xs font-bold text-gray-700">{metrics.breakdown.sd}</span>
+            <span className="block text-xs font-bold text-[#2B2D42]">{metrics.breakdown.sd}</span>
           </div>
           <div>
             <span className="block text-[10px] font-bold text-gray-400">SMP</span>
-            <span className="block text-xs font-bold text-gray-700">{metrics.breakdown.smp}</span>
+            <span className="block text-xs font-bold text-[#2B2D42]">{metrics.breakdown.smp}</span>
           </div>
           <div>
             <span className="block text-[10px] font-bold text-gray-400">SMA</span>
-            <span className="block text-xs font-bold text-gray-700">{metrics.breakdown.sma}</span>
+            <span className="block text-xs font-bold text-[#2B2D42]">{metrics.breakdown.sma}</span>
           </div>
           <div>
             <span className="block text-[10px] font-bold text-gray-400">SNBT</span>
-            <span className="block text-xs font-bold text-gray-700">{metrics.breakdown.snbt}</span>
+            <span className="block text-xs font-bold text-[#2B2D42]">{metrics.breakdown.snbt}</span>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@ export function StatCards({ metrics }: StatCardsProps) {
       {/* Card 2: Tutors & Classes */}
       <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
         <div>
-          <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-[#F0F4F8] flex items-center justify-center text-[#364FAB] mb-4">
             <GraduationCap className="w-5 h-5" />
           </div>
 
@@ -63,7 +63,7 @@ export function StatCards({ metrics }: StatCardsProps) {
             Tutors & Classes
           </p>
           <div className="flex items-baseline gap-1.5">
-            <span className="text-3xl font-extrabold text-gray-900 tracking-tight">
+            <span className="text-3xl font-extrabold text-[#2B2D42] tracking-tight">
               {metrics.totalTutors}
             </span>
             <span className="text-sm font-semibold text-gray-400">
@@ -76,11 +76,11 @@ export function StatCards({ metrics }: StatCardsProps) {
         <div className="mt-5">
           <div className="flex justify-between items-center text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1.5">
             <span>Capacity</span>
-            <span className="text-blue-600">{metrics.capacityPercentage}%</span>
+            <span className="text-[#364FAB]">{metrics.capacityPercentage}%</span>
           </div>
-          <div className="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
+          <div className="w-full bg-[#F0F4F8] h-2 rounded-full overflow-hidden">
             <div
-              className="bg-blue-600 h-full rounded-full transition-all duration-500"
+              className="bg-[#364FAB] h-full rounded-full transition-all duration-500"
               style={{ width: `${metrics.capacityPercentage}%` }}
             />
           </div>
@@ -90,7 +90,7 @@ export function StatCards({ metrics }: StatCardsProps) {
       {/* Card 3: SNBT Participation */}
       <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
         <div>
-          <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-[#F0F4F8] flex items-center justify-center text-[#364FAB] mb-4">
             <ClipboardCheck className="w-5 h-5" />
           </div>
 
@@ -98,10 +98,10 @@ export function StatCards({ metrics }: StatCardsProps) {
             SNBT Participation
           </p>
           <div className="flex items-center gap-3">
-            <span className="text-3xl font-extrabold text-gray-900 tracking-tight">
+            <span className="text-3xl font-extrabold text-[#2B2D42] tracking-tight">
               {metrics.snbtParticipationRate}%
             </span>
-            <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-xs tracking-wider">
+            <span className="text-[10px] font-bold text-[#364FAB] bg-[#F0F4F8] px-2 py-0.5 rounded-xs tracking-wider">
               HIGH
             </span>
           </div>
@@ -110,10 +110,10 @@ export function StatCards({ metrics }: StatCardsProps) {
         {/* Segmented Progress */}
         <div className="mt-5">
           <div className="flex gap-1.5">
-            <div className="h-1.5 flex-1 bg-blue-600 rounded-full" />
-            <div className="h-1.5 flex-1 bg-blue-600 rounded-full" />
-            <div className="h-1.5 flex-1 bg-blue-600 rounded-full" />
-            <div className="h-1.5 flex-1 bg-gray-200 rounded-full" />
+            <div className="h-1.5 flex-1 bg-[#364FAB] rounded-full" />
+            <div className="h-1.5 flex-1 bg-[#364FAB] rounded-full" />
+            <div className="h-1.5 flex-1 bg-[#364FAB] rounded-full" />
+            <div className="h-1.5 flex-1 bg-[#F0F4F8] rounded-full" />
           </div>
         </div>
       </div>
@@ -121,14 +121,14 @@ export function StatCards({ metrics }: StatCardsProps) {
       {/* Card 4: Monthly Revenue */}
       <div className="bg-white rounded-2xl p-5 border border-gray-100 shadow-xs flex flex-col justify-between hover:shadow-md transition-shadow">
         <div>
-          <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-blue-600 mb-4">
+          <div className="w-10 h-10 rounded-xl bg-[#F0F4F8] flex items-center justify-center text-[#364FAB] mb-4">
             <Wallet className="w-5 h-5" />
           </div>
 
           <p className="text-[11px] font-bold text-gray-400 uppercase tracking-wider mb-1">
             Monthly Revenue
           </p>
-          <p className="text-2xl lg:text-3xl font-extrabold text-gray-900 tracking-tight">
+          <p className="text-2xl lg:text-3xl font-extrabold text-[#2B2D42] tracking-tight">
             Rp {(metrics.monthlyRevenue / 1000).toLocaleString('id-ID')}.000
           </p>
         </div>
