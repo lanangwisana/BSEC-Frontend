@@ -16,35 +16,42 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
   const ctaRedirectUrl = data?.ctaRedirectUrl || '#daftar'
   const ctaSecondaryLabel = data?.ctaSecondaryLabel || 'Tanya via WhatsApp'
   const ctaSecondaryUrl = data?.ctaSecondaryUrl || 'https://wa.me/6281234567890'
-  const mediaUrl = data?.assetMediaUrl || 'https://lh3.googleusercontent.com/aida-public/AB6AXuCfUaFmB9Q8RFWS2pLuZZXyEUIBuZg0kF1utgp3b4MKEx2IXz39lb3rhGpZH-0-R1Fg2nOCDijgWkNp7dhzVvjKezhnK42GJ_1J0_uuPBG2ZsJ9uNqjYdlfNN_Y6e893_FjlN51iG3YbGb_Kgo8K3klipA65xdW9WWIoD0qoEsVT3pAZ9v3FnF_9VY5R6MWJ2A9-561CMX3hVdce6n0qn7l84iApkIBFGX2J9M0GN9j5KG3Rg3jndn_'
+  const mediaUrl = data?.assetMediaUrl || '/images/image 1.png'
+  const floatingText = data?.floatingBadgeText || '500+ Siswa Lolos'
+  const floatingSubtext = data?.floatingBadgeSubtext || 'Pengajar PTN favorit berpengalaman.'
 
   return (
-    <section className="hero-gradient overflow-hidden pt-20">
-      <div className="max-w-[1280px] mx-auto px-6 py-12 md:py-24 grid grid-cols-1 md:grid-cols-2 gap-12 items-center min-h-[600px]">
-        <div className="space-y-6 animate-fade-in-up">
-          <div className="flex items-center gap-2 bg-secondary-container/30 w-fit px-3 py-1 rounded-full text-on-secondary-container">
-            <div className="flex text-yellow-500">
-              <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
-              <span className="material-symbols-outlined text-[18px]" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+    <section className="relative overflow-hidden bg-white pt-24 pb-16 md:pb-24">
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-[#1D4ED8]/5 -skew-x-12 transform translate-x-1/4 -z-10"></div>
+      <div className="max-w-[1280px] mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-2 gap-12 items-center min-h-[600px]">
+        <div className="space-y-6 relative z-10 animate-fade-in-up">
+          <div className="inline-flex items-center gap-2 bg-[#EFF6FF] px-4 py-2 rounded-full text-[#1D4ED8] border border-[#1D4ED8]/10">
+            <div className="flex">
+              <span className="material-symbols-outlined text-[18px] text-yellow-500" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <span className="material-symbols-outlined text-[18px] text-yellow-500" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <span className="material-symbols-outlined text-[18px] text-yellow-500" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <span className="material-symbols-outlined text-[18px] text-yellow-500" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
+              <span className="material-symbols-outlined text-[18px] text-yellow-500" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>
             </div>
-            <span className="text-sm font-semibold tracking-wide">{taglineBadge}</span>
+            <span className="text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">{taglineBadge}</span>
           </div>
           
-          <h1 className="font-headline-lg text-4xl md:text-5xl lg:text-6xl text-primary font-extrabold leading-tight tracking-tight">
-            {headline}
+          <h1 className="text-4xl md:text-5xl lg:text-[56px] lg:leading-[1.15] text-[#1E293B] font-extrabold tracking-tight">
+            {headline.includes('Terbaik') ? (
+              <>
+                {headline.split('Terbaik')[0]} <span className="text-[#1D4ED8]">Terbaik {headline.split('Terbaik')[1]}</span>
+              </>
+            ) : headline}
           </h1>
           
-          <p className="font-body-lg text-lg text-on-surface-variant max-w-lg">
+          <p className="text-lg text-gray-600 max-w-lg leading-relaxed font-medium">
             {subHeadline}
           </p>
           
           <div className="flex flex-wrap gap-4 pt-2">
             <Link
               href={ctaRedirectUrl}
-              className="bg-primary text-white px-8 py-4 rounded-xl font-bold text-base shadow-lg hover:shadow-primary/20 hover:scale-105 transition-all active:scale-95 inline-block text-center"
+              className="bg-[#1D4ED8] hover:bg-[#1e40af] text-white px-9 py-4 rounded-2xl font-bold text-base shadow-xl shadow-[#1D4ED8]/30 hover:-translate-y-1 hover:shadow-2xl transition-all duration-300 inline-block text-center cursor-pointer"
             >
               {ctaLabel}
             </Link>
@@ -52,22 +59,35 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
               href={ctaSecondaryUrl}
               target="_blank"
               rel="noreferrer"
-              className="bg-surface-container-lowest border border-outline-variant text-primary px-8 py-4 rounded-xl font-semibold text-base hover:bg-surface-container-low transition-all flex items-center gap-2 inline-flex"
+              className="bg-white border-2 border-gray-200 text-[#1E293B] px-8 py-4 rounded-2xl font-bold hover:bg-[#EFF6FF] transition-all flex items-center gap-2 inline-flex group cursor-pointer"
             >
-              <span className="material-symbols-outlined">chat</span>
+              <span className="material-symbols-outlined text-[#1D4ED8] group-hover:rotate-12 transition-transform">chat</span>
               {ctaSecondaryLabel}
             </a>
           </div>
         </div>
         
-        <div className="relative group lg:ml-10">
-          <div className="absolute -inset-4 bg-primary/5 rounded-[40px] blur-2xl group-hover:bg-primary/10 transition-all duration-700"></div>
-          <div className="relative bg-white p-4 rounded-3xl shadow-xl transform rotate-2 group-hover:rotate-0 transition-transform duration-500 overflow-hidden">
-            <img 
-              alt="BSEC Learning Hero" 
-              className="w-full h-[350px] md:h-[450px] object-cover rounded-2xl" 
-              src={mediaUrl}
-            />
+        <div className="relative">
+          <div className="absolute -top-10 -right-10 w-64 h-64 bg-[#1D4ED8]/10 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute -bottom-10 -left-10 w-64 h-64 bg-[#1D4ED8]/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
+          <div className="relative z-10 floating">
+            <div className="hero-blob overflow-hidden border-8 border-white shadow-2xl bg-gradient-to-br from-[#EFF6FF] to-white">
+              <img 
+                alt="BSEC Student Portrait" 
+                className="w-full h-[450px] md:h-[540px] object-cover object-top" 
+                src={mediaUrl}
+              />
+            </div>
+            
+            <div className="absolute -bottom-4 -right-2 bg-white p-5 rounded-3xl shadow-2xl border border-gray-100 max-w-[210px] hidden sm:block">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="bg-emerald-100 text-emerald-600 p-1 rounded-full flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[16px]">check</span>
+                </span>
+                <span className="text-xs font-bold text-[#1E293B]">{floatingText}</span>
+              </div>
+              <p className="text-[11px] text-gray-500 font-medium">{floatingSubtext}</p>
+            </div>
           </div>
         </div>
       </div>

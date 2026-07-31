@@ -9,84 +9,99 @@ const About: React.FC<AboutProps> = ({ data }) => {
   const title = data?.title || 'Tentang BSEC'
   const subtitle = data?.subtitle || 'Bimbingan belajar profesional yang berkomitmen mencetak generasi unggul'
   const paragraph1 = data?.descriptionParagraph1 || 'BSEC (Brown Smart Education Center) hadir sebagai solusi pendidikan terpercaya bagi siswa SD, SMP, dan SMA di Indonesia. Dengan metode pembelajaran yang terstruktur dan mentor berpengalaman, kami membantu siswa meraih prestasi akademik terbaik.'
-  const paragraph2 = data?.descriptionParagraph2 || 'Didirikan pada tahun 2014, BSEC telah membantu lebih dari 500 siswa mencapai target akademik mereka, termasuk lolos ke PTN favorit melalui jalur SNBT.'
   const vision = data?.visionText || 'Menjadi pusat bimbingan belajar terdepan yang mencetak generasi unggul dan berprestasi di Indonesia.'
-  
-  const mission = data?.missions || [
-    'Menyediakan pendidikan berkualitas dengan metode pembelajaran inovatif',
-    'Mengembangkan potensi akademik dan karakter siswa secara optimal',
-    'Menciptakan lingkungan belajar yang nyaman dan menyenangkan',
-    'Membantu siswa meraih prestasi tertinggi dalam setiap jenjang pendidikan',
-  ]
+  const missionText = data?.missions?.[0] || 'Inovatif, nyaman, dan berorientasi pada prestasi akademik tertinggi siswa.'
 
-  const highlights = data?.highlights || [
-    { icon: 'school', number: '10+', label: 'Tahun Pengalaman' },
-    { icon: 'groups', number: '500+', label: 'Siswa Berprestasi' },
-    { icon: 'star', number: '95%', label: 'Kepuasan Siswa' },
-  ]
+  const card1Num = data?.statCard1Number || '10+'
+  const card1Label = data?.statCard1Label || 'TAHUN PENGALAMAN'
+  const card2Num = data?.statCard2Number || '500+'
+  const card2Label = data?.statCard2Label || 'SISWA BERPRESTASI'
+  const card3Num = data?.statCard3Number || '95%'
+  const card3Label = data?.statCard3Label || 'KEPUASAN SISWA'
+  const card4Num = data?.statCard4Number || '2014'
+  const card4Label = data?.statCard4Label || 'TAHUN BERDIRI'
 
   return (
-    <section className="py-24 bg-white" id="tentang">
+    <section className="py-20 md:py-28 relative overflow-hidden bg-white" id="tentang">
       <div className="max-w-[1280px] mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="font-headline-lg text-3xl md:text-4xl text-primary font-bold mb-2">{title}</h2>
-          <p className="font-body-lg text-lg text-on-surface-variant">{subtitle}</p>
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left Cards Container (Exact Overlap Matching User UI) */}
+          <div className="order-2 md:order-1">
+            <div className="grid grid-cols-2 gap-4 md:gap-5 items-start">
+              {/* Left Column: Card 1 (Top, Overlapping) + Card 3 (Bottom) */}
+              <div className="flex flex-col">
+                {/* Card 1: 10+ TAHUN PENGALAMAN (Top Left, z-10) */}
+                <div className="relative z-10 bg-[#1D4ED8] p-7 md:p-8 rounded-[32px] text-white shadow-xl shadow-[#1D4ED8]/25 transform hover:-translate-y-1 transition-transform cursor-default">
+                  <span className="material-symbols-outlined text-[32px] mb-4 text-white">school</span>
+                  <div className="text-4xl md:text-5xl font-black mb-1 tracking-tight">{card1Num}</div>
+                  <div className="text-[11px] font-extrabold tracking-wider text-white/80 uppercase">
+                    {card1Label}
+                  </div>
+                </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
-          {/* Left - Image */}
-          <div className="relative h-[400px] rounded-3xl overflow-hidden shadow-xl group">
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-container to-secondary-container opacity-20 group-hover:opacity-30 transition-opacity duration-500" />
-            <div className="w-full h-full flex items-center justify-center bg-surface-container-low">
-              <span className="text-8xl transform group-hover:scale-110 transition-transform duration-500">🏫</span>
+                {/* Card 3: 95% KEPUASAN SISWA (Bottom Left, z-0, -mt-6 overlap under Card 1) */}
+                <div className="relative z-0 -mt-6 bg-[#EFF6FF] p-7 md:p-8 rounded-[32px] border border-blue-100 shadow-sm transform hover:-translate-y-1 transition-transform cursor-default">
+                  <span className="material-symbols-outlined text-[32px] mb-4 text-amber-400">star</span>
+                  <div className="text-4xl md:text-5xl font-black text-[#1E293B] mb-1 tracking-tight">{card3Num}</div>
+                  <div className="text-[11px] font-extrabold tracking-wider text-gray-500 uppercase">
+                    {card3Label}
+                  </div>
+                </div>
+              </div>
+
+              {/* Right Column: Card 2 (Top, Shifted Down) + Card 4 (Bottom) */}
+              <div className="flex flex-col gap-4 pt-6 md:pt-8">
+                {/* Card 2: 500+ SISWA BERPRESTASI (Top Right) */}
+                <div className="bg-white p-7 md:p-8 rounded-[32px] border border-gray-200/80 shadow-md shadow-gray-100 transform hover:-translate-y-1 transition-transform cursor-default">
+                  <span className="material-symbols-outlined text-[32px] mb-4 text-[#1D4ED8]">groups</span>
+                  <div className="text-4xl md:text-5xl font-black text-[#1E293B] mb-1 tracking-tight">{card2Num}</div>
+                  <div className="text-[11px] font-extrabold tracking-wider text-gray-500 uppercase">
+                    {card2Label}
+                  </div>
+                </div>
+
+                {/* Card 4: 2014 TAHUN BERDIRI (Bottom Right) */}
+                <div className="bg-white p-7 md:p-8 rounded-[32px] border border-gray-200/80 shadow-md shadow-gray-100 transform hover:-translate-y-1 transition-transform cursor-default">
+                  <span className="material-symbols-outlined text-[32px] mb-4 text-[#1D4ED8]">emoji_events</span>
+                  <div className="text-4xl md:text-5xl font-black text-[#1E293B] mb-1 tracking-tight">{card4Num}</div>
+                  <div className="text-[11px] font-extrabold tracking-wider text-gray-500 uppercase">
+                    {card4Label}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right - Description */}
-          <div className="space-y-6">
-            <p className="font-body-md text-lg text-on-surface-variant leading-relaxed">
+          {/* Right Text Content */}
+          <div className="order-1 md:order-2 space-y-6">
+            <div className="w-12 h-1.5 bg-[#1D4ED8]"></div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-[#1E293B] tracking-tight">{title}</h2>
+            <p className="text-lg font-bold text-[#1D4ED8]">{subtitle}</p>
+            <p className="text-gray-600 leading-relaxed text-base font-medium">
               {paragraph1}
             </p>
-            <p className="font-body-md text-lg text-on-surface-variant leading-relaxed">
-              {paragraph2}
-            </p>
 
-            {/* Highlights */}
-            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-outline-variant/30">
-              {highlights.map((item, index) => (
-                <div key={index} className="text-center">
-                  <div className="flex justify-center mb-2">
-                    <span className="material-symbols-outlined text-primary text-3xl">{item.icon}</span>
-                  </div>
-                  <div className="font-headline-md font-bold text-2xl text-primary">{item.number}</div>
-                  <div className="font-label-md text-sm text-secondary mt-1">{item.label}</div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+              <div className="flex gap-4 items-start">
+                <div className="shrink-0 w-11 h-11 bg-[#EFF6FF] rounded-2xl flex items-center justify-center text-[#1D4ED8]">
+                  <span className="material-symbols-outlined">visibility</span>
                 </div>
-              ))}
+                <div>
+                  <h4 className="font-bold text-[#1E293B] mb-1">Visi</h4>
+                  <p className="text-xs text-gray-500 leading-relaxed">{vision}</p>
+                </div>
+              </div>
+
+              <div className="flex gap-4 items-start">
+                <div className="shrink-0 w-11 h-11 bg-[#EFF6FF] rounded-2xl flex items-center justify-center text-[#1D4ED8]">
+                  <span className="material-symbols-outlined">flag</span>
+                </div>
+                <div>
+                  <h4 className="font-bold text-[#1E293B] mb-1">Misi</h4>
+                  <p className="text-xs text-gray-500 leading-relaxed">{missionText}</p>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-
-        {/* Vision & Mission */}
-        <div className="grid md:grid-cols-2 gap-8">
-          <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30 hover:shadow-md transition-all">
-            <h3 className="font-headline-md text-2xl font-bold text-primary mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-secondary-fixed">visibility</span> Visi
-            </h3>
-            <p className="text-on-surface-variant leading-relaxed text-lg">{vision}</p>
-          </div>
-
-          <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-sm border border-outline-variant/30 hover:shadow-md transition-all">
-            <h3 className="font-headline-md text-2xl font-bold text-primary mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-secondary-fixed">flag</span> Misi
-            </h3>
-            <ul className="space-y-3">
-              {mission.map((item: string, index: number) => (
-                <li key={index} className="flex items-start gap-3">
-                  <span className="material-symbols-outlined text-primary mt-0.5 text-[20px]">check</span>
-                  <span className="text-on-surface-variant text-lg">{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
