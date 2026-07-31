@@ -18,10 +18,10 @@ export default function LandingPage() {
       <Navbar />
       <Hero data={data.hero} />
       <About data={data.about} />
-      <Programs data={data.programs} />
+      <Programs categories={data.programCategories} data={data.programs} />
       <Advantages data={data.advantages} />
       <Testimonials data={data.testimonials} />
-      <CTA />
+      <CTA data={data.leadCapture} />
       <Footer data={data.footer} />
     </main>
   )
