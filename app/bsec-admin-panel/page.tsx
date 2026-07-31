@@ -24,10 +24,8 @@ export default function AdminLoginPage() {
 
     setIsLoading(true);
 
-    // Simulate authentication delay for smooth UX
     setTimeout(() => {
       setIsLoading(false);
-      // Redirect to Admin Dashboard
       router.push('/bsec-admin-panel/dashboard');
     }, 800);
   };
@@ -39,23 +37,23 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0f172a] flex items-center justify-center p-4 relative overflow-hidden font-sans antialiased text-gray-100">
+    <div className="min-h-screen bg-[#2B2D42] flex items-center justify-center p-4 relative overflow-hidden font-sans antialiased text-gray-100">
       {/* Background Glowing Ambient Orbs */}
-      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 -left-20 w-96 h-96 bg-[#364FAB]/30 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#364FAB]/20 rounded-full blur-3xl pointer-events-none" />
 
       {/* Main Login Card */}
-      <div className="w-full max-w-md bg-[#1e2538]/90 backdrop-blur-xl border border-gray-800/80 rounded-3xl p-8 shadow-2xl relative z-10 space-y-6">
+      <div className="w-full max-w-md bg-[#1f2133]/90 backdrop-blur-xl border border-white/10 rounded-3xl p-8 shadow-2xl relative z-10 space-y-6">
         {/* Branding Header */}
         <div className="text-center space-y-3">
-          <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white mx-auto shadow-lg shadow-blue-600/30">
+          <div className="w-14 h-14 rounded-2xl bg-[#364FAB] flex items-center justify-center text-white mx-auto shadow-lg shadow-[#364FAB]/30">
             <Building2 className="w-7 h-7" />
           </div>
           <div>
             <h1 className="text-2xl font-bold text-white tracking-tight">
               BSEC Admin Portal
             </h1>
-            <p className="text-xs text-gray-400 font-medium mt-1">
+            <p className="text-xs text-gray-300 font-medium mt-1">
               Enter your credentials to access the operational dashboard
             </p>
           </div>
@@ -71,7 +69,6 @@ export default function AdminLoginPage() {
 
         {/* Login Form */}
         <form onSubmit={handleLogin} className="space-y-4">
-          {/* Email Input */}
           <div className="space-y-1.5">
             <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider">
               Email / Username
@@ -83,12 +80,11 @@ export default function AdminLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@bsec.id"
-                className="w-full bg-[#161c2d] hover:bg-[#192033] focus:bg-[#161c2d] text-xs font-medium text-white pl-10 pr-4 py-3 rounded-xl border border-gray-700/60 focus:border-blue-500 focus:outline-hidden transition-all placeholder:text-gray-500"
+                className="w-full bg-white/5 hover:bg-white/10 focus:bg-white/10 text-xs font-medium text-white pl-10 pr-4 py-3 rounded-xl border border-white/10 focus:border-[#364FAB] focus:outline-hidden transition-all placeholder:text-gray-400"
               />
             </div>
           </div>
 
-          {/* Password Input */}
           <div className="space-y-1.5">
             <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider">
               Password
@@ -100,7 +96,7 @@ export default function AdminLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-[#161c2d] hover:bg-[#192033] focus:bg-[#161c2d] text-xs font-medium text-white pl-10 pr-10 py-3 rounded-xl border border-gray-700/60 focus:border-blue-500 focus:outline-hidden transition-all placeholder:text-gray-500"
+                className="w-full bg-white/5 hover:bg-white/10 focus:bg-white/10 text-xs font-medium text-white pl-10 pr-10 py-3 rounded-xl border border-white/10 focus:border-[#364FAB] focus:outline-hidden transition-all placeholder:text-gray-400"
               />
               <button
                 type="button"
@@ -116,14 +112,13 @@ export default function AdminLoginPage() {
             </div>
           </div>
 
-          {/* Remember Me & Forgot Password */}
           <div className="flex items-center justify-between text-xs pt-1">
             <label className="flex items-center gap-2 cursor-pointer text-gray-300 font-medium">
               <input
                 type="checkbox"
                 checked={rememberMe}
                 onChange={(e) => setRememberMe(e.target.checked)}
-                className="rounded-md border-gray-700 bg-[#161c2d] text-blue-600 focus:ring-blue-500 w-4 h-4 cursor-pointer"
+                className="rounded-md border-gray-700 bg-white/10 text-[#364FAB] focus:ring-[#364FAB] w-4 h-4 cursor-pointer"
               />
               <span>Remember me</span>
             </label>
@@ -134,17 +129,16 @@ export default function AdminLoginPage() {
                 e.preventDefault();
                 alert('Contact Lead Administrator to reset your password.');
               }}
-              className="text-blue-400 hover:text-blue-300 font-semibold transition-colors"
+              className="text-[#bfc9ff] hover:text-white font-semibold transition-colors"
             >
               Forgot password?
             </a>
           </div>
 
-          {/* Submit Button */}
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-blue-600/30 transition-all duration-200 hover:scale-[1.01] disabled:opacity-70 disabled:pointer-events-none mt-2"
+            className="w-full bg-[#364FAB] hover:bg-[#2b3e8c] active:bg-[#1f2d66] text-white font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg shadow-[#364FAB]/30 transition-all duration-200 hover:scale-[1.01] disabled:opacity-70 disabled:pointer-events-none mt-2 cursor-pointer"
           >
             {isLoading ? (
               <>
@@ -160,20 +154,18 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Demo Account Quick Fill Helper */}
-        <div className="pt-2 border-t border-gray-800/80 text-center">
+        <div className="pt-2 border-t border-white/10 text-center">
           <button
             onClick={handleQuickFill}
             type="button"
-            className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-400 hover:text-blue-400 transition-colors bg-[#161c2d] border border-gray-700/60 px-3 py-1.5 rounded-lg"
+            className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-gray-300 hover:text-white transition-colors bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg cursor-pointer"
           >
-            <ShieldCheck className="w-3.5 h-3.5 text-blue-400" />
+            <ShieldCheck className="w-3.5 h-3.5 text-[#364FAB]" />
             <span>Click for Demo Credentials (admin@bsec.id / admin123)</span>
           </button>
         </div>
 
-        {/* Copyright Footer */}
-        <p className="text-[10px] text-center text-gray-500 font-medium">
+        <p className="text-[10px] text-center text-gray-400 font-medium">
           © {new Date().getFullYear()} BSEC MANAGEMENT SYSTEM. ALL RIGHTS RESERVED.
         </p>
       </div>
