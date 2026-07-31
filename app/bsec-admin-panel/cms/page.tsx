@@ -338,8 +338,66 @@ export default function CmsLandingPage() {
                       value={heroForm.assetMediaUrl}
                       onChange={(e) => handleHeroChange('assetMediaUrl', e.target.value)}
                       className="w-full bg-gray-50/80 text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
+                      placeholder="Masukkan URL atau upload file di bawah"
                     />
                   </div>
+
+                  {/* Upload langsung file JPG/PNG – otomatis replace assetMediaUrl */}
+                  <div className="pt-2">
+                    <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+                      Upload Hero Image (JPG / PNG, maks 5 MB)
+                    </label>
+                    <label className="flex items-center gap-2 cursor-pointer w-full bg-blue-50 hover:bg-blue-100 border-2 border-dashed border-blue-300 rounded-xl p-3 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-blue-500 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0L8 8m4-4l4 4" />
+                      </svg>
+                      <span className="text-xs text-blue-600 font-semibold">Pilih file untuk di-upload…</span>
+                      <input
+                        type="file"
+                        accept="image/jpeg,image/png"
+                        className="hidden"
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://127.0.0.1:8000/api';
+                          const formData = new FormData();
+                          formData.append('assetMedia', file);
+                          try {
+                            const res = await fetch(`${apiBase}/admin/cms/upload-hero-image`, {
+                              method: 'POST',
+                              body: formData,
+                            });
+                            const data = await res.json();
+                            if (res.ok && data.url) {
+                              // Auto replace – URL masuk ke state, akan tersimpan saat Publish Changes
+                              // Simpan URL relatif (/storage/...) – Next.js rewrite proxy akan handle routing-nya
+                              handleHeroChange('assetMediaUrl', data.url);
+                            } else {
+                              alert('Upload gagal: ' + (data.message || 'Terjadi kesalahan'));
+                            }
+                          } catch (err) {
+                            console.error(err);
+                            alert('Tidak dapat terhubung ke server. Pastikan backend aktif.');
+                          }
+                          // Reset input agar file yang sama bisa di-upload ulang
+                          e.target.value = '';
+                        }}
+                      />
+                    </label>
+                    {/* Thumbnail preview gambar yang sedang aktif */}
+                    {heroForm.assetMediaUrl && (
+                      <div className="mt-2 relative w-full rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
+                        <img
+                          src={heroForm.assetMediaUrl}
+                          alt="Hero image preview"
+                          className="w-full max-h-36 object-cover"
+                          onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+                        />
+                        <span className="absolute bottom-1 right-2 text-[9px] text-gray-400 bg-white/80 rounded px-1">preview</span>
+                      </div>
+                    )}
+                  </div>
+
                 </>
               )}
 
