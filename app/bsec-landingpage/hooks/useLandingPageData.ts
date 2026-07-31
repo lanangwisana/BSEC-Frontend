@@ -16,18 +16,23 @@ export function useLandingPageData() {
       ctaSecondaryUrl: 'https://wa.me/6281234567890',
       assetFileName: 'hero-banner-2026.png',
       assetHint: 'PNG, JPG up to 10MB',
-      assetMediaUrl:
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuCfUaFmB9Q8RFWS2pLuZZXyEUIBuZg0kF1utgp3b4MKEx2IXz39lb3rhGpZH-0-R1Fg2nOCDijgWkNp7dhzVvjKezhnK42GJ_1J0_uuPBG2ZsJ9uNqjYdlfNN_Y6e893_FjlN51iG3YbGb_Kgo8K3klipA65xdW9WWIoD0qoEsVT3pAZ9v3FnF_9VY5R6MWJ2A9-561CMX3hVdce6n0qn7l84iApkIBFGX2J9M0GN9j5KG3Rg3jndn_',
+      assetMediaUrl: '/images/image 1.png',
       isVisible: true,
     },
+    programCategories: [
+      { id: 'sd', name: 'Program SD', sortOrder: 1 },
+      { id: 'smp', name: 'Program SMP', sortOrder: 2 },
+      { id: 'sma', name: 'Program SMA', sortOrder: 3 },
+      { id: 'utbk', name: 'Intensif UTBK/SNBT', sortOrder: 4 },
+    ],
     programs: [
-      { id: 'p-1', category: 'sd', title: 'Matematika SD', description: 'Fokus pada konsep dasar dan pemecahan masalah kreatif.', priceFormatted: 'Rp 450k/bln', iconName: 'calculate', targetAge: 'Kelas 1-6 SD', isActive: true, sortOrder: 1 },
-      { id: 'p-2', category: 'sd', title: 'IPA Dasar', description: 'Eksperimen seru untuk mengenali fenomena alam sekitar.', priceFormatted: 'Rp 450k/bln', iconName: 'biotech', targetAge: 'Kelas 1-6 SD', isActive: true, sortOrder: 2 },
-      { id: 'p-3', category: 'sd', title: 'Bahasa Inggris SD', description: 'Membangun kepercayaan diri berbicara sejak dini.', priceFormatted: 'Rp 500k/bln', iconName: 'language', targetAge: 'Kelas 1-6 SD', isActive: true, sortOrder: 3 },
-      { id: 'p-4', category: 'smp', title: 'Persiapan UN SMP', description: 'Latihan soal intensif dan pembahasan materi tuntas.', priceFormatted: 'Rp 650k/bln', iconName: 'assignment', targetAge: 'Kelas 7-9 SMP', isActive: true, sortOrder: 4 },
-      { id: 'p-5', category: 'smp', title: 'Matematika Lanjut', description: 'Aljabar dan geometri dengan cara yang menyenangkan.', priceFormatted: 'Rp 600k/bln', iconName: 'functions', targetAge: 'Kelas 7-9 SMP', isActive: true, sortOrder: 5 },
-      { id: 'p-6', category: 'sma', title: 'Matematika Wajib', description: 'Kupas tuntas materi sekolah dan tugas harian.', priceFormatted: 'Rp 750k/bln', iconName: 'draw', targetAge: 'Kelas 10-12 SMA', isActive: true, sortOrder: 6 },
-      { id: 'p-7', category: 'utbk', title: 'TPS Intensif', description: 'Trik cepat mengerjakan soal Penalaran Umum.', priceFormatted: 'Rp 1.2jt/pkt', iconName: 'speed', targetAge: 'Siswa kelas 12 & Alumni', isActive: true, sortOrder: 7 },
+      { id: 'p-1', categoryId: 'sd', title: 'Matematika SD', description: 'Fokus pada konsep dasar dan pemecahan masalah kreatif.', priceFormatted: 'Rp 450k/bln', iconName: 'calculate', targetAge: 'Kelas 1-6 SD', isActive: true, sortOrder: 1 },
+      { id: 'p-2', categoryId: 'sd', title: 'IPA Dasar', description: 'Eksperimen seru untuk mengenali fenomena alam sekitar.', priceFormatted: 'Rp 450k/bln', iconName: 'biotech', targetAge: 'Kelas 1-6 SD', isActive: true, sortOrder: 2 },
+      { id: 'p-3', categoryId: 'sd', title: 'Bahasa Inggris SD', description: 'Membangun kepercayaan diri berbicara sejak dini.', priceFormatted: 'Rp 500k/bln', iconName: 'language', targetAge: 'Kelas 1-6 SD', isActive: true, sortOrder: 3 },
+      { id: 'p-4', categoryId: 'smp', title: 'Persiapan UN SMP', description: 'Latihan soal intensif dan pembahasan materi tuntas.', priceFormatted: 'Rp 650k/bln', iconName: 'assignment', targetAge: 'Kelas 7-9 SMP', isActive: true, sortOrder: 4 },
+      { id: 'p-5', categoryId: 'smp', title: 'Matematika Lanjut', description: 'Aljabar dan geometri dengan cara yang menyenangkan.', priceFormatted: 'Rp 600k/bln', iconName: 'functions', targetAge: 'Kelas 7-9 SMP', isActive: true, sortOrder: 5 },
+      { id: 'p-6', categoryId: 'sma', title: 'Matematika Wajib', description: 'Kupas tuntas materi sekolah dan tugas harian.', priceFormatted: 'Rp 750k/bln', iconName: 'draw', targetAge: 'Kelas 10-12 SMA', isActive: true, sortOrder: 6 },
+      { id: 'p-7', categoryId: 'utbk', title: 'TPS Intensif', description: 'Trik cepat mengerjakan soal Penalaran Umum.', priceFormatted: 'Rp 1.2jt/pkt', iconName: 'speed', targetAge: 'Siswa kelas 12 & Alumni', isActive: true, sortOrder: 7 },
     ],
     testimonials: [
       {
