@@ -19,6 +19,7 @@ export interface HeroSectionContent {
   assetFileName: string;
   assetHint: string;
   assetMediaUrl: string;
+  assetMediaPosition?: string;
   floatingBadgeText?: string;
   floatingBadgeSubtext?: string;
   isVisible: boolean;
