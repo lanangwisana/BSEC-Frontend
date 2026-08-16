@@ -17,6 +17,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
   const ctaSecondaryLabel = data?.ctaSecondaryLabel || 'Tanya via WhatsApp'
   const ctaSecondaryUrl = data?.ctaSecondaryUrl || 'https://wa.me/6281234567890'
   const mediaUrl = data?.assetMediaUrl || '/images/image 1.png'
+  const mediaPosition = data?.assetMediaPosition || '50% 15%'
   const floatingText = data?.floatingBadgeText || '500+ Siswa Lolos'
   const floatingSubtext = data?.floatingBadgeSubtext || 'Pengajar PTN favorit berpengalaman.'
 
@@ -74,7 +75,8 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             <div className="hero-blob overflow-hidden border-8 border-white shadow-2xl bg-gradient-to-br from-[#EFF6FF] to-white">
               <img 
                 alt="BSEC Student Portrait" 
-                className="w-full h-[450px] md:h-[540px] object-cover object-top" 
+                className={`w-full h-[450px] md:h-[540px] object-cover ${mediaPosition.startsWith('object-') ? mediaPosition : ''}`}
+                style={mediaPosition.includes('%') ? { objectPosition: mediaPosition } : undefined}
                 src={mediaUrl}
               />
             </div>
