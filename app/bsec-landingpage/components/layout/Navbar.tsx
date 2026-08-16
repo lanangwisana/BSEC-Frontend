@@ -51,7 +51,7 @@ const Navbar = () => {
         </nav>
         
         <div className="hidden md:flex items-center">
-          <Link href="#daftar" className="bg-primary text-white px-6 py-2.5 rounded-lg font-label-md text-sm hover:brightness-110 active:scale-95 transition-all duration-150 shadow-sm font-semibold">
+          <Link href="#daftar" className="bg-[#1D4ED8] text-white px-6 py-2.5 rounded-lg font-label-md text-sm shadow-md shadow-[#1D4ED8]/30 hover:brightness-110 active:scale-95 transition-all duration-150 font-semibold">
             Konsultasi Gratis
           </Link>
         </div>
