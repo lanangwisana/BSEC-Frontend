@@ -11,7 +11,7 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
     <>
       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
         <h2 className="text-sm font-bold text-gray-900 tracking-tight">
-          Hero Section Content & Floating Badges
+          Hero Section Content
         </h2>
         <div className="flex items-center gap-2">
           <span className="text-[11px] text-gray-400 font-semibold">Visible on site</span>
@@ -60,28 +60,61 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
         />
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div>
-          <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-            Primary CTA Label
-          </label>
-          <input
-            type="text"
-            value={heroForm.ctaLabel}
-            onChange={(e) => handleHeroChange('ctaLabel', e.target.value)}
-            className="w-full bg-gray-50/80 text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
-          />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Primary CTA */}
+        <div className="space-y-3 p-3.5 bg-gray-50/60 rounded-xl border border-gray-100">
+          <div>
+            <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+              Primary CTA Label
+            </label>
+            <input
+              type="text"
+              value={heroForm.ctaLabel}
+              onChange={(e) => handleHeroChange('ctaLabel', e.target.value)}
+              className="w-full bg-white text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
+              placeholder="Contoh: Daftar Kelas Trial"
+            />
+          </div>
+          <div>
+            <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+              Primary CTA URL
+            </label>
+            <input
+              type="text"
+              value={heroForm.ctaRedirectUrl || '#daftar'}
+              onChange={(e) => handleHeroChange('ctaRedirectUrl', e.target.value)}
+              className="w-full bg-white text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
+              placeholder="Contoh: #daftar atau https://..."
+            />
+          </div>
         </div>
-        <div>
-          <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-            Secondary CTA Label
-          </label>
-          <input
-            type="text"
-            value={heroForm.ctaSecondaryLabel}
-            onChange={(e) => handleHeroChange('ctaSecondaryLabel', e.target.value)}
-            className="w-full bg-gray-50/80 text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
-          />
+
+        {/* Secondary CTA */}
+        <div className="space-y-3 p-3.5 bg-gray-50/60 rounded-xl border border-gray-100">
+          <div>
+            <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+              Secondary CTA Label
+            </label>
+            <input
+              type="text"
+              value={heroForm.ctaSecondaryLabel}
+              onChange={(e) => handleHeroChange('ctaSecondaryLabel', e.target.value)}
+              className="w-full bg-white text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
+              placeholder="Contoh: Tanya via WhatsApp"
+            />
+          </div>
+          <div>
+            <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+              Secondary CTA URL
+            </label>
+            <input
+              type="text"
+              value={heroForm.ctaSecondaryUrl || 'https://wa.me/6285606201036'}
+              onChange={(e) => handleHeroChange('ctaSecondaryUrl', e.target.value)}
+              className="w-full bg-white text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
+              placeholder="Contoh: https://wa.me/..."
+            />
+          </div>
         </div>
       </div>
 
