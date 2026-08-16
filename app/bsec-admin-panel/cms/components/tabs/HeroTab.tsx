@@ -144,19 +144,6 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
         </div>
       </div>
 
-      <div>
-        <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
-          Hero Student Image Path / URL
-        </label>
-        <input
-          type="text"
-          value={heroForm.assetMediaUrl}
-          onChange={(e) => handleHeroChange('assetMediaUrl', e.target.value)}
-          className="w-full bg-gray-50/80 text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"
-          placeholder="Masukkan URL atau upload file di bawah"
-        />
-      </div>
-
       {/* Upload langsung file JPG/PNG – otomatis replace assetMediaUrl */}
       <div className="pt-2">
         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
