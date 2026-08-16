@@ -37,7 +37,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
             <span className="text-xs font-bold uppercase tracking-wider text-[#1D4ED8]">{taglineBadge}</span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-[56px] lg:leading-[1.15] text-[#1E293B] font-extrabold tracking-tight">
+          <h1 className="text-3xl md:text-5xl lg:text-[56px] lg:leading-[1.15] text-[#1E293B] font-extrabold tracking-tight">
             {headline.includes('Terbaik') ? (
               <>
                 {headline.split('Terbaik')[0]} <span className="text-[#1D4ED8]">Terbaik {headline.split('Terbaik')[1]}</span>
