@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
+import { Eye, X, Move } from 'lucide-react';
 import { HeroSectionContent } from '../../types';
 
 interface HeroTabProps {
@@ -7,6 +8,56 @@ interface HeroTabProps {
 }
 
 export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) => {
+  const [showPreviewModal, setShowPreviewModal] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [initialCoords, setInitialCoords] = useState({ x: 50, y: 15 });
+
+  const modalCropRef = useRef<HTMLDivElement>(null);
+  const thumbnailCropRef = useRef<HTMLDivElement>(null);
+
+  const getCoords = (pos?: string) => {
+    if (!pos) return { x: 50, y: 15 };
+    if (pos === 'object-top') return { x: 50, y: 0 };
+    if (pos === 'object-center') return { x: 50, y: 50 };
+    if (pos === 'object-bottom') return { x: 50, y: 100 };
+    const parts = pos.split(' ');
+    if (parts.length === 2) {
+      const xVal = parseInt(parts[0], 10);
+      const yVal = parseInt(parts[1], 10);
+      return {
+        x: isNaN(xVal) ? 50 : xVal,
+        y: isNaN(yVal) ? 15 : yVal,
+      };
+    }
+    return { x: 50, y: 15 };
+  };
+
+  const startDrag = (clientX: number, clientY: number) => {
+    setIsDragging(true);
+    setDragStart({ x: clientX, y: clientY });
+    setInitialCoords(getCoords(heroForm.assetMediaPosition));
+  };
+
+  const moveDrag = (clientX: number, clientY: number, containerEl: HTMLDivElement | null) => {
+    if (!isDragging || !containerEl) return;
+    const rect = containerEl.getBoundingClientRect();
+    const deltaX = clientX - dragStart.x;
+    const deltaY = clientY - dragStart.y;
+
+    const percentDeltaX = (deltaX / rect.width) * 100;
+    const percentDeltaY = (deltaY / rect.height) * 100;
+
+    const newX = Math.max(0, Math.min(100, Math.round(initialCoords.x - percentDeltaX)));
+    const newY = Math.max(0, Math.min(100, Math.round(initialCoords.y - percentDeltaY)));
+
+    handleHeroChange('assetMediaPosition', `${newX}% ${newY}%`);
+  };
+
+  const endDrag = () => {
+    setIsDragging(false);
+  };
+
   return (
     <>
       <div className="flex items-center justify-between pb-3 border-b border-gray-100">
@@ -144,11 +195,12 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
         </div>
       </div>
 
-      {/* Upload langsung file JPG/PNG – otomatis replace assetMediaUrl */}
-      <div className="pt-2">
-        <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
+      {/* Upload langsung file JPG/PNG & Focus Control */}
+      <div className="pt-2 space-y-3">
+        <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider">
           Upload Hero Image (JPG / PNG, maks 5 MB)
         </label>
+
         <label className="flex items-center gap-2 cursor-pointer w-full bg-blue-50 hover:bg-blue-100 border-2 border-dashed border-blue-300 rounded-xl p-3 transition-colors">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -194,22 +246,141 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
             }}
           />
         </label>
+
         {heroForm.assetMediaUrl && (
-          <div className="mt-2 relative w-full rounded-xl overflow-hidden border border-gray-200 bg-gray-100">
-            <img
-              src={heroForm.assetMediaUrl}
-              alt="Hero image preview"
-              className="w-full max-h-36 object-cover"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = 'none';
-              }}
-            />
-            <span className="absolute bottom-1 right-2 text-[9px] text-gray-400 bg-white/80 rounded px-1">
-              preview
-            </span>
+          <div className="pt-2">
+            {/* Thumbnail Preview with Full Modal Trigger */}
+            <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 bg-gray-100 group">
+              <img
+                src={heroForm.assetMediaUrl}
+                alt="Hero image preview"
+                className={`w-full max-h-48 object-cover ${
+                  (heroForm.assetMediaPosition || '').startsWith('object-')
+                    ? heroForm.assetMediaPosition
+                    : ''
+                }`}
+                style={
+                  (heroForm.assetMediaPosition || '').includes('%')
+                    ? { objectPosition: heroForm.assetMediaPosition }
+                    : undefined
+                }
+              />
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(true)}
+                className="absolute inset-0 bg-slate-900/60 opacity-90 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 text-white text-xs font-bold cursor-pointer"
+              >
+                <Eye className="w-4 h-4 text-blue-400" />
+                <span>Preview & Atur Posisi Foto (Full Modal)</span>
+              </button>
+            </div>
           </div>
         )}
       </div>
+
+      {/* FULL IMAGE INSPECTION MODAL */}
+      {showPreviewModal && heroForm.assetMediaUrl && (
+        <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
+          <div className="bg-white rounded-2xl max-w-3xl w-full p-6 space-y-4 shadow-2xl border border-gray-100 overflow-hidden max-h-[90vh] flex flex-col">
+            <div className="flex items-center justify-between pb-3 border-b border-gray-100 shrink-0">
+              <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
+                {/* <Eye className="w-4 h-4 text-[#1D4ED8]" /> */}
+                Image Crop & Focus Moda
+              </h3>
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(false)}
+                className="text-gray-400 hover:text-gray-600 cursor-pointer"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="flex-1 overflow-y-auto space-y-4 pr-1">
+              {/* Full Uncropped Original Image */}
+              <div>
+                <span className="text-[11px] font-bold text-gray-500 uppercase tracking-wider block mb-1.5">
+                  Gambar Utuh Asli (Uncropped Original Image)
+                </span>
+                <div className="rounded-xl border border-gray-200 bg-gray-900 flex items-center justify-center p-2 min-h-[220px]">
+                  <img
+                    src={heroForm.assetMediaUrl}
+                    alt="Original full resolution"
+                    className="max-h-[300px] w-auto object-contain rounded-lg shadow-md"
+                  />
+                </div>
+                {/* Live Hero Crop Preview with Direct Mouse/Touch Dragging */}
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-[11px] pt-2 font-bold text-gray-500 uppercase tracking-wider block">
+                    Tampilan Live Crop Hero ({heroForm.assetMediaPosition || '50% 15%'})
+                  </span>
+                </div>
+                <div
+                  ref={modalCropRef}
+                  onMouseDown={(e) => {
+                    e.preventDefault();
+                    startDrag(e.clientX, e.clientY);
+                  }}
+                  onMouseMove={(e) => {
+                    if (isDragging) {
+                      e.preventDefault();
+                      moveDrag(e.clientX, e.clientY, modalCropRef.current);
+                    }
+                  }}
+                  onMouseUp={endDrag}
+                  onMouseLeave={endDrag}
+                  onTouchStart={(e) => {
+                    const touch = e.touches[0];
+                    if (touch) startDrag(touch.clientX, touch.clientY);
+                  }}
+                  onTouchMove={(e) => {
+                    const touch = e.touches[0];
+                    if (touch && isDragging) {
+                      moveDrag(touch.clientX, touch.clientY, modalCropRef.current);
+                    }
+                  }}
+                  onTouchEnd={endDrag}
+                  className={`hero-blob overflow-hidden border-4 border-white shadow-lg bg-gradient-to-br from-[#EFF6FF] to-white h-[280px] relative select-none cursor-grab active:cursor-grabbing ${
+                    isDragging ? 'ring-4 ring-blue-400 border-blue-200' : ''
+                  }`}
+                >
+                  <img
+                    src={heroForm.assetMediaUrl}
+                    alt="Cropped hero preview"
+                    className={`w-full h-full object-cover pointer-events-none ${
+                      (heroForm.assetMediaPosition || '').startsWith('object-')
+                        ? heroForm.assetMediaPosition
+                        : ''
+                    }`}
+                    style={
+                      (heroForm.assetMediaPosition || '').includes('%')
+                        ? { objectPosition: heroForm.assetMediaPosition }
+                        : undefined
+                    }
+                  />
+                  <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 bg-slate-900/80 backdrop-blur-xs text-white text-[11px] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 pointer-events-none shadow-lg border border-white/20">
+                    <Move className="w-3.5 h-3.5 text-blue-400 animate-pulse" />
+                    <span>Geser / Drag Foto Ini Secara Bebas</span>
+                  </div>
+                </div>
+              </div>              
+              </div>
+            </div>
+
+            <div className="pt-3 border-t border-gray-100 flex items-center justify-end shrink-0">
+              <button
+                type="button"
+                onClick={() => setShowPreviewModal(false)}
+                className="bg-[#1D4ED8] text-white px-5 py-2 rounded-xl text-xs font-bold hover:bg-[#1e40af] transition-colors cursor-pointer"
+              >
+                Selesai & Simpan Setting
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };
+
