@@ -1,5 +1,5 @@
-import React from 'react';
-import { Layers, Plus, Trash2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Layers, Plus, Trash2, Pencil, Check, X } from 'lucide-react';
 import { ProgramCategory, ProgramCmsItem } from '../../types';
 
 interface ProgramsTabProps {
@@ -10,6 +10,7 @@ interface ProgramsTabProps {
   programCategories: ProgramCategory[];
   selectedCategoryId: string;
   setSelectedCategoryId: (id: string) => void;
+  updateProgramCategory?: (id: string, name: string) => void;
   deleteProgramCategory: (id: string) => void;
   programs: ProgramCmsItem[];
   toggleProgramItem: (id: string) => void;
@@ -26,6 +27,7 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
   programCategories,
   selectedCategoryId,
   setSelectedCategoryId,
+  updateProgramCategory,
   deleteProgramCategory,
   programs,
   toggleProgramItem,
@@ -33,9 +35,24 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
   onOpenAddCategoryModal,
   onOpenAddProductModal,
 }) => {
+  const [editingCatId, setEditingCatId] = useState<string | null>(null);
+  const [editingCatName, setEditingCatName] = useState<string>('');
+
   const currentCategoryName =
     programCategories.find((c) => c.id === selectedCategoryId)?.name || selectedCategoryId;
   const filteredPrograms = programs.filter((p) => p.categoryId === selectedCategoryId);
+
+  const handleStartEdit = (cat: ProgramCategory) => {
+    setEditingCatId(cat.id);
+    setEditingCatName(cat.name);
+  };
+
+  const handleSaveEdit = (id: string) => {
+    if (editingCatName.trim() && updateProgramCategory) {
+      updateProgramCategory(id, editingCatName.trim());
+    }
+    setEditingCatId(null);
+  };
 
   return (
     <div className="space-y-4">
@@ -79,36 +96,95 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
       </div>
 
       <div className="flex items-center gap-2 overflow-x-auto pb-2">
-        {programCategories.map((cat) => (
-          <div
-            key={cat.id}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer ${
-              selectedCategoryId === cat.id
-                ? 'bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs'
-                : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100'
-            }`}
-          >
-            <span onClick={() => setSelectedCategoryId(cat.id)} className="flex-1">
-              {cat.name}
-            </span>
-            {programCategories.length > 1 && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  if (confirm(`Hapus Parent Program "${cat.name}" dan semua produk turunannya?`)) {
-                    deleteProgramCategory(cat.id);
-                    setSelectedCategoryId(programCategories[0].id);
-                  }
-                }}
-                className={`p-0.5 rounded hover:bg-red-500 hover:text-white transition-colors ${
-                  selectedCategoryId === cat.id ? 'text-blue-200' : 'text-gray-400'
-                }`}
-              >
-                <Trash2 className="w-3 h-3" />
-              </button>
-            )}
-          </div>
-        ))}
+        {programCategories.map((cat) => {
+          const isEditing = editingCatId === cat.id;
+          const isSelected = selectedCategoryId === cat.id;
+
+          return (
+            <div
+              key={cat.id}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all border ${
+                isSelected
+                  ? 'bg-[#1D4ED8] text-white border-[#1D4ED8] shadow-xs'
+                  : 'bg-gray-50 text-gray-600 border-gray-200 hover:bg-gray-100'
+              }`}
+            >
+              {isEditing ? (
+                <div className="flex items-center gap-1">
+                  <input
+                    type="text"
+                    value={editingCatName}
+                    onChange={(e) => setEditingCatName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleSaveEdit(cat.id);
+                      if (e.key === 'Escape') setEditingCatId(null);
+                    }}
+                    autoFocus
+                    className="bg-white text-gray-900 px-2 py-0.5 rounded text-xs border border-blue-400 font-bold focus:outline-none w-28"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleSaveEdit(cat.id)}
+                    className="p-1 text-emerald-400 hover:text-emerald-300 cursor-pointer"
+                    title="Simpan Nama"
+                  >
+                    <Check className="w-3.5 h-3.5" />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditingCatId(null)}
+                    className="p-1 text-red-400 hover:text-red-300 cursor-pointer"
+                    title="Batal"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <span
+                    onClick={() => setSelectedCategoryId(cat.id)}
+                    className="cursor-pointer flex-1"
+                  >
+                    {cat.name}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleStartEdit(cat);
+                    }}
+                    className={`p-0.5 rounded transition-colors cursor-pointer ${
+                      isSelected ? 'text-blue-200 hover:text-white' : 'text-gray-400 hover:text-gray-700'
+                    }`}
+                    title="Edit Nama Kategori"
+                  >
+                    <Pencil className="w-3 h-3" />
+                  </button>
+                  {programCategories.length > 1 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (confirm(`Hapus Parent Program "${cat.name}" dan semua produk turunannya?`)) {
+                          deleteProgramCategory(cat.id);
+                          setSelectedCategoryId(
+                            programCategories.find((c) => c.id !== cat.id)?.id || ''
+                          );
+                        }
+                      }}
+                      className={`p-0.5 rounded hover:bg-red-500 hover:text-white transition-colors cursor-pointer ${
+                        isSelected ? 'text-blue-200' : 'text-gray-400'
+                      }`}
+                      title="Hapus Kategori"
+                    >
+                      <Trash2 className="w-3 h-3" />
+                    </button>
+                  )}
+                </>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="space-y-3 pt-2">
