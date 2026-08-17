@@ -177,15 +177,9 @@ export default function CmsLandingPage() {
             <div>
               <div className="flex items-center gap-2">
                 <h1 className="text-xl font-bold text-gray-900 tracking-tight">
-                  CMS Landing Page Content Manager
+                  Landing Page Content Manager
                 </h1>
-                <span className="text-[10px] font-extrabold bg-emerald-100 text-emerald-700 px-2.5 py-0.5 rounded-full uppercase tracking-wider">
-                  PUBLIC SITE: ONLINE
-                </span>
               </div>
-              <p className="text-xs text-gray-400 font-medium mt-1">
-                Manage branding, hero floating badges, stat cards, categories, products, and lead capture.
-              </p>
             </div>
 
             <div className="flex items-center gap-3">
@@ -215,7 +209,7 @@ export default function CmsLandingPage() {
                 onClick={() => setActiveTab(tab)}
                 className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap cursor-pointer ${
                   activeTab === tab
-                    ? 'bg-[#1E293B] text-white shadow-xs'
+                    ? 'bg-[#1D4ED8] text-white shadow-xs'
                     : 'text-gray-500 hover:text-gray-900 hover:bg-gray-100/70'
                 }`}
               >
