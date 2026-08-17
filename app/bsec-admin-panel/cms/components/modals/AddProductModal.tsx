@@ -12,6 +12,8 @@ interface AddProductModalProps {
     priceFormatted: string;
     iconName: string;
     targetAge: string;
+    learningObjectives: string;
+    learningFocus: string;
   };
   setProductForm: React.Dispatch<
     React.SetStateAction<{
@@ -20,6 +22,8 @@ interface AddProductModalProps {
       priceFormatted: string;
       iconName: string;
       targetAge: string;
+      learningObjectives: string;
+      learningFocus: string;
     }>
   >;
   handleCreateProduct: (e: React.FormEvent) => void;
@@ -36,8 +40,8 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in">
-      <div className="bg-white rounded-2xl p-6 max-w-md w-full shadow-2xl border border-gray-100 space-y-4">
+    <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50 animate-fade-in overflow-y-auto">
+      <div className="bg-white rounded-2xl p-6 max-w-lg w-full shadow-2xl border border-gray-100 space-y-4 my-8">
         <div className="flex items-center justify-between pb-3 border-b border-gray-100">
           <h3 className="text-sm font-bold text-gray-900">
             Tambah Produk Turunan di &quot;{selectedCategoryName}&quot;
@@ -93,6 +97,28 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
                 className="w-full bg-gray-50 text-xs p-2.5 rounded-xl border border-gray-200"
               />
             </div>
+          </div>
+
+          <div>
+            <label className="block text-[11px] font-bold text-gray-600 mb-1">Tujuan Pembelajaran (Learning Objectives)</label>
+            <textarea
+              rows={2}
+              placeholder="Contoh: Menguasai konsep dasar matematika, siap menghadapi Ujian Sekolah dengan percaya diri..."
+              value={productForm.learningObjectives || ''}
+              onChange={(e) => setProductForm({ ...productForm, learningObjectives: e.target.value })}
+              className="w-full bg-gray-50 text-xs p-2.5 rounded-xl border border-gray-200"
+            />
+          </div>
+
+          <div>
+            <label className="block text-[11px] font-bold text-gray-600 mb-1">Fokus Pembelajaran (Learning Focus)</label>
+            <textarea
+              rows={2}
+              placeholder="Contoh: Penalaran Logis, Latihan Soal Intensif, Pemecahan Masalah Kreatif..."
+              value={productForm.learningFocus || ''}
+              onChange={(e) => setProductForm({ ...productForm, learningFocus: e.target.value })}
+              className="w-full bg-gray-50 text-xs p-2.5 rounded-xl border border-gray-200"
+            />
           </div>
 
           <div className="flex justify-end gap-2 pt-3 border-t border-gray-100">

@@ -99,6 +99,8 @@ export default function CmsLandingPage() {
     priceFormatted: '',
     iconName: 'school',
     targetAge: '',
+    learningObjectives: '',
+    learningFocus: '',
   });
   const [testimonialForm, setTestimonialForm] = useState({
     studentName: '',
@@ -132,9 +134,11 @@ export default function CmsLandingPage() {
       priceFormatted: productForm.priceFormatted,
       iconName: productForm.iconName || 'school',
       targetAge: productForm.targetAge || 'SD/SMP/SMA',
+      learningObjectives: productForm.learningObjectives || '',
+      learningFocus: productForm.learningFocus || '',
       isActive: true,
     });
-    setProductForm({ title: '', description: '', priceFormatted: '', iconName: 'school', targetAge: '' });
+    setProductForm({ title: '', description: '', priceFormatted: '', iconName: 'school', targetAge: '', learningObjectives: '', learningFocus: '' });
     setShowAddProductModal(false);
   };
 

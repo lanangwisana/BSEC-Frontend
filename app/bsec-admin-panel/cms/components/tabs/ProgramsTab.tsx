@@ -46,7 +46,16 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
     description: string;
     priceFormatted: string;
     targetAge: string;
-  }>({ title: '', description: '', priceFormatted: '', targetAge: '' });
+    learningObjectives: string;
+    learningFocus: string;
+  }>({
+    title: '',
+    description: '',
+    priceFormatted: '',
+    targetAge: '',
+    learningObjectives: '',
+    learningFocus: '',
+  });
 
   const currentCategoryName =
     programCategories.find((c) => c.id === selectedCategoryId)?.name || selectedCategoryId;
@@ -71,6 +80,8 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
       description: product.description,
       priceFormatted: product.priceFormatted,
       targetAge: product.targetAge || '',
+      learningObjectives: product.learningObjectives || '',
+      learningFocus: product.learningFocus || '',
     });
   };
 
@@ -81,6 +92,8 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
         description: editProductForm.description,
         priceFormatted: editProductForm.priceFormatted,
         targetAge: editProductForm.targetAge,
+        learningObjectives: editProductForm.learningObjectives,
+        learningFocus: editProductForm.learningFocus,
       });
     }
     setEditingProductId(null);
@@ -328,6 +341,38 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
                         setEditProductForm((prev) => ({ ...prev, description: e.target.value }))
                       }
                       className="w-full bg-gray-50 text-xs p-2 rounded-lg border border-gray-300"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 mb-1">
+                      Tujuan Pembelajaran (Learning Objectives)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={editProductForm.learningObjectives}
+                      onChange={(e) =>
+                        setEditProductForm((prev) => ({ ...prev, learningObjectives: e.target.value }))
+                      }
+                      className="w-full bg-gray-50 text-xs p-2 rounded-lg border border-gray-300"
+                      placeholder="Contoh: Menguasai konsep dasar matematika..."
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 mb-1">
+                      Fokus Pembelajaran (Learning Focus)
+                    </label>
+                    <textarea
+                      rows={2}
+                      value={editProductForm.learningFocus}
+                      onChange={(e) =>
+                        setEditProductForm((prev) => ({ ...prev, learningFocus: e.target.value }))
+                      }
+                      className="w-full bg-gray-50 text-xs p-2 rounded-lg border border-gray-300"
+                      placeholder="Contoh: Penalaran Logis, Pemecahan Masalah..."
                     />
                   </div>
                 </div>

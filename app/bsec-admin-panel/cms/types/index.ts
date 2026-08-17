@@ -40,6 +40,8 @@ export interface ProgramCmsItem {
   priceFormatted: string;
   iconName: string;
   targetAge?: string;
+  learningObjectives?: string;
+  learningFocus?: string;
   isActive: boolean;
   sortOrder: number;
 }
