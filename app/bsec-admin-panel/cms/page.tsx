@@ -9,9 +9,10 @@ import { CmsTab } from './types';
 
 // Import Modular Tab Components
 import { HeroTab } from './components/tabs/HeroTab';
+import { AboutTab } from './components/tabs/AboutTab';
 import { ProgramsTab } from './components/tabs/ProgramsTab';
+import { AdvantagesTab } from './components/tabs/AdvantagesTab';
 import { TestimonialsTab } from './components/tabs/TestimonialsTab';
-import { AboutAdvantagesTab } from './components/tabs/AboutAdvantagesTab';
 import { LeadCaptureTab } from './components/tabs/LeadCaptureTab';
 import { FooterTab } from './components/tabs/FooterTab';
 
@@ -26,9 +27,10 @@ import { AddAdvantageModal } from './components/modals/AddAdvantageModal';
 
 const tabs: CmsTab[] = [
   'Hero Banner',
+  'About',
   'Programs',
+  'Advantages',
   'Testimonials',
-  'About & Advantages',
   'Lead Capture CTA',
   'Footer & Contact',
 ];
@@ -226,6 +228,10 @@ export default function CmsLandingPage() {
                 <HeroTab heroForm={heroForm} handleHeroChange={handleHeroChange} />
               )}
 
+              {activeTab === 'About' && (
+                <AboutTab aboutForm={aboutForm} handleAboutChange={handleAboutChange} />
+              )}
+
               {activeTab === 'Programs' && (
                 <ProgramsTab
                   programsTitle={programsTitle}
@@ -244,6 +250,18 @@ export default function CmsLandingPage() {
                 />
               )}
 
+              {activeTab === 'Advantages' && (
+                <AdvantagesTab
+                  advantagesTitle={advantagesTitle}
+                  setAdvantagesTitle={setAdvantagesTitle}
+                  advantagesSubtitle={advantagesSubtitle}
+                  setAdvantagesSubtitle={setAdvantagesSubtitle}
+                  advantages={advantages}
+                  deleteAdvantage={deleteAdvantage}
+                  onOpenAddAdvantageModal={() => setShowAddAdvantageModal(true)}
+                />
+              )}
+
               {activeTab === 'Testimonials' && (
                 <TestimonialsTab
                   testimonialsTitle={testimonialsTitle}
@@ -252,20 +270,6 @@ export default function CmsLandingPage() {
                   toggleTestimonial={toggleTestimonial}
                   deleteTestimonial={deleteTestimonial}
                   onOpenAddTestimonialModal={() => setShowAddTestimonialModal(true)}
-                />
-              )}
-
-              {activeTab === 'About & Advantages' && (
-                <AboutAdvantagesTab
-                  aboutForm={aboutForm}
-                  handleAboutChange={handleAboutChange}
-                  advantagesTitle={advantagesTitle}
-                  setAdvantagesTitle={setAdvantagesTitle}
-                  advantagesSubtitle={advantagesSubtitle}
-                  setAdvantagesSubtitle={setAdvantagesSubtitle}
-                  advantages={advantages}
-                  deleteAdvantage={deleteAdvantage}
-                  onOpenAddAdvantageModal={() => setShowAddAdvantageModal(true)}
                 />
               )}
 
