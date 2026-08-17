@@ -36,19 +36,19 @@ export function Sidebar() {
   ];
 
   return (
-    <aside className="w-60 bg-[#2B2D42] text-gray-300 min-h-screen flex flex-col justify-between p-4 shrink-0 transition-all duration-300">
+    <aside className="w-60 bg-[#1D4ED8] text-blue-100 min-h-screen flex flex-col justify-between p-4 shrink-0 transition-all duration-300">
       <div>
         {/* Logo & Header */}
         <div className="px-3 py-4 mb-6">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-[#364FAB] flex items-center justify-center text-white font-bold shadow-md shadow-[#364FAB]/20">
-              <Building2 className="w-4 h-4" />
+            <div className="w-8 h-8 rounded-xl bg-white flex items-center justify-center text-[#1D4ED8] font-bold shadow-sm">
+              <Building2 className="w-4 h-4 text-[#1D4ED8]" />
             </div>
             <div>
               <h1 className="font-bold text-white tracking-wider text-sm leading-none">
                 BSEC Admin
               </h1>
-              <p className="text-[10px] text-gray-300 font-semibold tracking-wider uppercase mt-1 opacity-80">
+              <p className="text-[10px] text-blue-100/70 font-semibold tracking-wider uppercase mt-1 opacity-80">
                 Management Portal
               </p>
             </div>
@@ -69,11 +69,11 @@ export function Sidebar() {
                 href={item.href}
                 className={`flex items-center gap-3.5 px-4 py-2.5 rounded-xl font-medium text-xs transition-all duration-200 ${
                   isActive
-                    ? 'bg-[#364FAB] text-white font-semibold shadow-md shadow-[#364FAB]/30'
-                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    ? 'bg-white text-[#1D4ED8] font-bold shadow-sm'
+                    : 'text-blue-100/80'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-gray-300'}`} />
+                <Icon className={`w-4 h-4 ${isActive ? 'text-[#1D4ED8]' : 'text-blue-100/80'}`} />
                 <span>{item.label}</span>
               </Link>
             );
@@ -84,14 +84,14 @@ export function Sidebar() {
       {/* Footer Controls & Actions */}
       <div className="space-y-2 pt-4 border-t border-white/10">
         {/* New Enrollment Button */}
-        <button className="w-full flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white py-2.5 px-3 rounded-xl text-xs font-semibold border border-white/10 transition-all shadow-xs">
+        <button className="w-full flex items-center justify-center gap-2 bg-white/15 text-white py-2.5 px-3 rounded-xl text-xs font-semibold border border-white/10 transition-all shadow-xs">
           <Plus className="w-4 h-4" />
           <span>New Enrollment</span>
         </button>
 
         {/* System Status Banner */}
         <div className="bg-white/5 border border-white/10 rounded-xl p-3 text-[11px]">
-          <p className="text-[9px] font-bold text-gray-300 uppercase tracking-wider opacity-70">
+          <p className="text-[9px] font-bold text-blue-100/70 uppercase tracking-wider opacity-70">
             System Status
           </p>
           <div className="flex items-center gap-1.5 text-emerald-400 font-bold mt-1">
@@ -102,9 +102,9 @@ export function Sidebar() {
 
         <Link
           href="#"
-          className="flex items-center gap-3.5 px-4 py-2 rounded-xl font-medium text-xs text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+          className="flex items-center gap-3.5 px-4 py-2 rounded-xl font-medium text-xs text-blue-100/80 transition-all duration-200"
         >
-          <Settings className="w-4 h-4 text-gray-300" />
+          <Settings className="w-4 h-4 text-blue-100/80" />
           <span>Settings</span>
         </Link>
       </div>
