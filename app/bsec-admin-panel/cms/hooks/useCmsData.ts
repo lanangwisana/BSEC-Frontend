@@ -226,6 +226,12 @@ export function useCmsData() {
     setProgramCategories((prev) => [...prev, newCat]);
   };
 
+  const updateProgramCategory = (id: string, name: string) => {
+    setProgramCategories((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, name } : c))
+    );
+  };
+
   const deleteProgramCategory = (id: string) => {
     setProgramCategories((prev) => prev.filter((c) => c.id !== id));
     setPrograms((prev) => prev.filter((p) => p.categoryId !== id));
@@ -348,6 +354,7 @@ export function useCmsData() {
     handleHeroChange,
     programCategories,
     addProgramCategory,
+    updateProgramCategory,
     deleteProgramCategory,
     programs,
     addProgramItem,
