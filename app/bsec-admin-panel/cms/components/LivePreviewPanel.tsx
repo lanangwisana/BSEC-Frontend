@@ -567,12 +567,6 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
             </div>
           </div>
         </div>
-
-        {/* Bottom Real-time Indicator Bar */}
-        <div className="bg-[#1E293B] text-white p-3 rounded-xl flex items-center justify-center gap-2 text-[11px] font-bold tracking-wide mt-2 shadow-xs">
-          <Globe className="w-3.5 h-3.5 text-[#1D4ED8] animate-spin" />
-          <span>Real-time Draft Sync Active (Unpublished)</span>
-        </div>
       </div>
     </div>
   );
