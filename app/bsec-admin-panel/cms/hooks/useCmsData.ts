@@ -251,6 +251,12 @@ export function useCmsData() {
     setPrograms((prev) => prev.filter((p) => p.id !== id));
   };
 
+  const updateProgramItem = (id: string, updated: Partial<ProgramCmsItem>) => {
+    setPrograms((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, ...updated } : p))
+    );
+  };
+
   const toggleProgramItem = (id: string) => {
     setPrograms((prev) =>
       prev.map((p) => (p.id === id ? { ...p, isActive: !p.isActive } : p))
@@ -358,6 +364,7 @@ export function useCmsData() {
     deleteProgramCategory,
     programs,
     addProgramItem,
+    updateProgramItem,
     deleteProgramItem,
     toggleProgramItem,
     testimonials,
