@@ -48,12 +48,19 @@ const Programs: React.FC<ProgramsProps> = ({ categories, data }) => {
 
   const currentDisplayList = activeDynamicItems.length > 0
     ? activeDynamicItems.map((item) => ({
+        id: item.id,
         title: item.title,
         desc: item.description,
         price: item.priceFormatted,
         icon: item.iconName,
       }))
-    : defaultPrograms[activeTabId] || []
+    : (defaultPrograms[activeTabId] || []).map((item, idx) => ({
+        id: `${activeTabId}-${idx + 1}`,
+        title: item.title,
+        desc: item.desc,
+        price: item.price,
+        icon: item.icon,
+      }))
 
   return (
     <section className="py-24 bg-white" id="programs">
@@ -85,9 +92,9 @@ const Programs: React.FC<ProgramsProps> = ({ categories, data }) => {
               Belum ada program kelas untuk kategori ini.
             </div>
           ) : (
-            currentDisplayList.map((item, index) => (
+            currentDisplayList.map((item) => (
               <div 
-                key={index} 
+                key={item.id} 
                 className="bg-white border-2 border-gray-200/80 p-8 md:p-10 rounded-[40px] flex flex-col hover:border-[#1D4ED8] hover:shadow-2xl hover:shadow-[#1D4ED8]/10 transition-all duration-500 group relative overflow-hidden"
               >
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-[#1D4ED8]/5 rounded-full group-hover:scale-150 transition-transform duration-700 pointer-events-none" />
@@ -96,14 +103,24 @@ const Programs: React.FC<ProgramsProps> = ({ categories, data }) => {
                 </span>
                 <h4 className="text-2xl mb-4 font-black text-[#1E293B]">{item.title}</h4>
                 <p className="text-gray-600 mb-10 flex-grow leading-relaxed font-medium">{item.desc}</p>
-                <div className="flex flex-col gap-4 mt-auto">
-                  <span className="text-2xl font-black text-[#1D4ED8]">{item.price}</span>
-                  <Link 
-                    href="#daftar" 
-                    className="w-full bg-[#EFF6FF] text-[#1D4ED8] py-4 rounded-2xl text-center text-sm font-black hover:bg-[#1D4ED8] hover:text-white transition-all duration-300 shadow-xs cursor-pointer"
-                  >
-                    Pilih Program
-                  </Link>
+                <div className="flex flex-col gap-3 mt-auto">
+                  <span className="text-2xl font-black text-[#1D4ED8] mb-1">{item.price}</span>
+                  
+                  <div className="grid grid-cols-2 gap-3">
+                    <Link 
+                      href={`/bsec-landingpage/programs/${item.id}`}
+                      className="bg-gray-100 text-gray-700 py-3.5 px-4 rounded-2xl text-center text-xs font-extrabold hover:bg-gray-200 transition-all duration-300 cursor-pointer flex items-center justify-center gap-1"
+                    >
+                      <span>Learn More</span>
+                      <span className="text-xs">→</span>
+                    </Link>
+                    <Link 
+                      href="#daftar" 
+                      className="bg-[#1D4ED8] text-white py-3.5 px-4 rounded-2xl text-center text-xs font-black hover:bg-[#1e40af] transition-all duration-300 shadow-md shadow-[#1D4ED8]/20 cursor-pointer"
+                    >
+                      Pilih Program
+                    </Link>
+                  </div>
                 </div>
               </div>
             ))
