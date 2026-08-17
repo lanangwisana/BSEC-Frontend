@@ -1,8 +1,9 @@
 export type CmsTab =
   | 'Hero Banner'
+  | 'About'
   | 'Programs'
+  | 'Advantages'
   | 'Testimonials'
-  | 'About & Advantages'
   | 'Lead Capture CTA'
   | 'Footer & Contact';
 
