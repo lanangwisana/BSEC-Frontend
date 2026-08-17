@@ -106,20 +106,23 @@ const Programs: React.FC<ProgramsProps> = ({ categories, data }) => {
                 <div className="flex flex-col gap-3 mt-auto">
                   <span className="text-2xl font-black text-[#1D4ED8] mb-1">{item.price}</span>
                   
-                  <div className="grid grid-cols-2 gap-3">
-                    <Link 
-                      href={`/bsec-landingpage/programs/${item.id}`}
-                      className="bg-gray-100 text-gray-700 py-3.5 px-4 rounded-2xl text-center text-xs font-extrabold hover:bg-gray-200 transition-all duration-300 cursor-pointer flex items-center justify-center gap-1"
-                    >
-                      <span>Learn More</span>
-                      <span className="text-xs">→</span>
-                    </Link>
+                  <div className="flex flex-col gap-2.5 pt-1">
                     <Link 
                       href="#daftar" 
-                      className="bg-[#1D4ED8] text-white py-3.5 px-4 rounded-2xl text-center text-xs font-black hover:bg-[#1e40af] transition-all duration-300 shadow-md shadow-[#1D4ED8]/20 cursor-pointer"
+                      className="w-full bg-[#1D4ED8] text-white py-3.5 px-4 rounded-2xl text-center text-xs font-black hover:bg-[#1e40af] transition-all duration-300 shadow-md shadow-[#1D4ED8]/20 cursor-pointer block"
                     >
                       Pilih Program
                     </Link>
+
+                    <div className="flex justify-end pt-1">
+                      <Link 
+                        href={`/bsec-landingpage/programs/${item.id}`}
+                        className="text-gray-500 hover:text-[#1D4ED8] text-[11px] font-bold transition-colors duration-200 flex items-center gap-1 cursor-pointer group/link"
+                      >
+                        <span>Learn More</span>
+                        <span className="text-xs group-hover/link:translate-x-0.5 transition-transform">→</span>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </div>
