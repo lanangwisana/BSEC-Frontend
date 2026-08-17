@@ -273,13 +273,10 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
               {activeTab === 'About' && (
                 <div className={`p-4 bg-white space-y-3 ${deviceMode === 'mobile' ? 'p-3' : 'p-5'}`}>
                   <div className="space-y-1">
-                    <span className="text-[9px] font-bold text-[#1D4ED8] uppercase tracking-wider">
-                      Profil & Statistik
-                    </span>
                     <h2 className="text-sm font-extrabold text-gray-900">
                       {aboutForm.title || 'Tentang Brown Smart Education Center'}
                     </h2>
-                    <p className="text-[10px] text-[#1D4ED8] font-bold leading-relaxed whitespace-pre-line">
+                    <p className="text-[10px] text-[#1D4ED8] font-bold leading-relaxed">
                       {aboutForm.subtitle || 'Lembaga Bimbingan Belajar Terpercaya di Indonesia'}
                     </p>
                     {aboutForm.descriptionParagraph1 && (
