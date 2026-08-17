@@ -9,6 +9,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
   const title = data?.title || 'Tentang BSEC'
   const subtitle = data?.subtitle || 'Bimbingan belajar profesional yang berkomitmen mencetak generasi unggul'
   const paragraph1 = data?.descriptionParagraph1 || 'BSEC (Brown Smart Education Center) hadir sebagai solusi pendidikan terpercaya bagi siswa SD, SMP, dan SMA di Indonesia. Dengan metode pembelajaran yang terstruktur dan mentor berpengalaman, kami membantu siswa meraih prestasi akademik terbaik.'
+  const paragraph2 = data?.descriptionParagraph2 || ''
   const vision = data?.visionText || 'Menjadi pusat bimbingan belajar terdepan yang mencetak generasi unggul dan berprestasi di Indonesia.'
   const missionText = data?.missions?.[0] || 'Inovatif, nyaman, dan berorientasi pada prestasi akademik tertinggi siswa.'
 
@@ -76,10 +77,15 @@ const About: React.FC<AboutProps> = ({ data }) => {
           <div className="order-1 md:order-2 space-y-6">
             <div className="w-12 h-1.5 bg-[#1D4ED8]"></div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#1E293B] tracking-tight">{title}</h2>
-            <p className="text-lg font-bold text-[#1D4ED8]">{subtitle}</p>
-            <p className="text-gray-600 leading-relaxed text-base font-medium">
+            <p className="text-lg font-bold text-[#1D4ED8] whitespace-pre-line">{subtitle}</p>
+            <p className="text-gray-600 leading-relaxed text-base font-medium whitespace-pre-line">
               {paragraph1}
             </p>
+            {paragraph2 && (
+              <p className="text-gray-600 leading-relaxed text-base font-medium whitespace-pre-line">
+                {paragraph2}
+              </p>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
               <div className="flex gap-4 items-start">
@@ -88,7 +94,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1E293B] mb-1">Visi</h4>
-                  <p className="text-xs text-gray-500 leading-relaxed">{vision}</p>
+                  <p className="text-xs text-gray-500 leading-relaxed whitespace-pre-line">{vision}</p>
                 </div>
               </div>
 
@@ -98,7 +104,15 @@ const About: React.FC<AboutProps> = ({ data }) => {
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1E293B] mb-1">Misi</h4>
-                  <p className="text-xs text-gray-500 leading-relaxed">{missionText}</p>
+                  <div className="text-xs text-gray-500 leading-relaxed space-y-1">
+                    {data?.missions && data.missions.length > 0 ? (
+                      data.missions.map((m, idx) => (
+                        <p key={idx} className="whitespace-pre-line">• {m}</p>
+                      ))
+                    ) : (
+                      <p className="whitespace-pre-line">{missionText}</p>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
