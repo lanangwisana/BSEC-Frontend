@@ -34,8 +34,8 @@ export const AboutTab: React.FC<AboutTabProps> = ({
         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-wider mb-1.5">
           Section Subtitle
         </label>
-        <textarea
-          rows={2}
+        <input
+          type="text"
           value={aboutForm.subtitle}
           onChange={(e) => handleAboutChange('subtitle', e.target.value)}
           className="w-full bg-gray-50/80 text-xs font-semibold text-gray-800 p-3 rounded-xl border border-gray-200"

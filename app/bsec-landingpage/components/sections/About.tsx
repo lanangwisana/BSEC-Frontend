@@ -77,7 +77,7 @@ const About: React.FC<AboutProps> = ({ data }) => {
           <div className="order-1 md:order-2 space-y-6">
             <div className="w-12 h-1.5 bg-[#1D4ED8]"></div>
             <h2 className="text-4xl md:text-5xl font-extrabold text-[#1E293B] tracking-tight">{title}</h2>
-            <p className="text-lg font-bold text-[#1D4ED8] whitespace-pre-line">{subtitle}</p>
+            <p className="text-lg font-bold text-[#1D4ED8]">{subtitle}</p>
             <p className="text-gray-600 leading-relaxed text-base font-medium whitespace-pre-line">
               {paragraph1}
             </p>
