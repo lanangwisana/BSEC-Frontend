@@ -26,13 +26,13 @@ export function Sidebar() {
   const pathname = usePathname();
 
   const navItems: NavItem[] = [
-    { label: 'Dashboard', href: '/admin-panel/dashboard', icon: LayoutDashboard },
-    { label: 'Student Management', href: '/admin-panel/stundent-management', icon: GraduationCap },
-    { label: 'Tutor & Staff', href: '/admin-panel/tutor-staff', icon: Users },
-    { label: 'Class Schedule', href: '/admin-panel/class-schedule', icon: Calendar },
-    { label: 'CMS Landing Page', href: '/admin-panel/cms', icon: Monitor },
-    { label: 'SNBT Tryout', href: '/admin-panel/snbt-tryout', icon: FileSpreadsheet },
-    { label: 'Financials', href: '/admin-panel/finance', icon: Wallet },
+    { label: 'Dashboard', href: '/bsec-admin-panel/dashboard', icon: LayoutDashboard },
+    { label: 'Student Management', href: '/bsec-admin-panel/stundent-management', icon: GraduationCap },
+    { label: 'Tutor & Staff', href: '/bsec-admin-panel/tutor-staff', icon: Users },
+    { label: 'Class Schedule', href: '/bsec-admin-panel/class-schedule', icon: Calendar },
+    { label: 'CMS Landing Page', href: '/bsec-admin-panel/cms', icon: Monitor },
+    { label: 'SNBT Tryout', href: '/bsec-admin-panel/snbt-tryout', icon: FileSpreadsheet },
+    { label: 'Financials', href: '/bsec-admin-panel/finance', icon: Wallet },
   ];
 
   return (
