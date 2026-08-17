@@ -289,11 +289,22 @@ export default function CmsLandingPage() {
 
             {/* Right Live Preview (~5 Cols) */}
             <LivePreviewPanel
+              activeTab={activeTab}
               deviceMode={deviceMode}
               setDeviceMode={setDeviceMode}
               heroForm={heroForm}
               aboutForm={aboutForm}
+              advantagesTitle={advantagesTitle}
+              advantagesSubtitle={advantagesSubtitle}
+              advantages={advantages}
+              programsTitle={programsTitle}
+              programsSubtitle={programsSubtitle}
+              programCategories={programCategories}
+              programs={programs}
               testimonialsTitle={testimonialsTitle}
+              testimonials={testimonials}
+              leadCaptureForm={leadCaptureForm}
+              footerForm={footerForm}
             />
           </div>
         </main>
