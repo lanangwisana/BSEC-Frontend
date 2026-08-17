@@ -427,9 +427,6 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
               {activeTab === 'Advantages' && (
                 <div className={`p-4 bg-white space-y-3 ${deviceMode === 'mobile' ? 'p-3' : 'p-5'}`}>
                   <div className="space-y-1">
-                    <span className="text-[9px] font-bold text-[#1D4ED8] uppercase tracking-wider">
-                      Keunggulan BSEC
-                    </span>
                     <h2 className="text-sm font-extrabold text-gray-900">
                       {advantagesTitle}
                     </h2>
