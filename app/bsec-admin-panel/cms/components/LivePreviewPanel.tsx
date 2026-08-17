@@ -279,9 +279,19 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
                     <h2 className="text-sm font-extrabold text-gray-900">
                       {aboutForm.title || 'Tentang Brown Smart Education Center'}
                     </h2>
-                    <p className="text-[10px] text-gray-500 leading-relaxed">
+                    <p className="text-[10px] text-[#1D4ED8] font-bold leading-relaxed whitespace-pre-line">
                       {aboutForm.subtitle || 'Lembaga Bimbingan Belajar Terpercaya di Indonesia'}
                     </p>
+                    {aboutForm.descriptionParagraph1 && (
+                      <p className="text-[10px] text-gray-600 leading-relaxed whitespace-pre-line pt-1">
+                        {aboutForm.descriptionParagraph1}
+                      </p>
+                    )}
+                    {aboutForm.descriptionParagraph2 && (
+                      <p className="text-[10px] text-gray-600 leading-relaxed whitespace-pre-line pt-1">
+                        {aboutForm.descriptionParagraph2}
+                      </p>
+                    )}
                   </div>
 
                   {/* 4 Stat Cards Grid: Desktop = 4 Cols or 2 Cols */}
@@ -320,10 +330,24 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
                     </div>
                   </div>
 
-                  {aboutForm.visionText && (
-                    <div className="pt-2 border-t border-gray-100">
-                      <span className="text-[9px] font-bold text-[#1D4ED8] uppercase block mb-0.5">Visi Utama</span>
-                      <p className="text-[10px] text-gray-600 italic leading-relaxed">&quot;{aboutForm.visionText}&quot;</p>
+                  {(aboutForm.visionText || (aboutForm.missions && aboutForm.missions.length > 0)) && (
+                    <div className="pt-2 border-t border-gray-100 grid grid-cols-2 gap-2 text-[9px]">
+                      {aboutForm.visionText && (
+                        <div>
+                          <span className="font-bold text-[#1D4ED8] uppercase block mb-0.5">Visi Utama</span>
+                          <p className="text-gray-600 italic leading-relaxed whitespace-pre-line">&quot;{aboutForm.visionText}&quot;</p>
+                        </div>
+                      )}
+                      {aboutForm.missions && aboutForm.missions.length > 0 && (
+                        <div>
+                          <span className="font-bold text-[#1D4ED8] uppercase block mb-0.5">Misi Utama</span>
+                          <div className="text-gray-600 leading-relaxed space-y-0.5">
+                            {aboutForm.missions.map((m, idx) => (
+                              <p key={idx} className="whitespace-pre-line">• {m}</p>
+                            ))}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   )}
                 </div>
