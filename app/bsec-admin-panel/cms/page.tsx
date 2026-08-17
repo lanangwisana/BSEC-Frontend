@@ -47,6 +47,7 @@ export default function CmsLandingPage() {
     handleHeroChange,
     programCategories,
     addProgramCategory,
+    updateProgramCategory,
     deleteProgramCategory,
     programs,
     addProgramItem,
@@ -241,6 +242,7 @@ export default function CmsLandingPage() {
                   programCategories={programCategories}
                   selectedCategoryId={selectedCategoryId}
                   setSelectedCategoryId={setSelectedCategoryId}
+                  updateProgramCategory={updateProgramCategory}
                   deleteProgramCategory={deleteProgramCategory}
                   programs={programs}
                   toggleProgramItem={toggleProgramItem}
