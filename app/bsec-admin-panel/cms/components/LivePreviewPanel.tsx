@@ -269,7 +269,67 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
                 </div>
               )}
 
-              {/* TAB 2: PROGRAMS PREVIEW */}
+              {/* TAB 2: ABOUT PREVIEW */}
+              {activeTab === 'About' && (
+                <div className={`p-4 bg-white space-y-3 ${deviceMode === 'mobile' ? 'p-3' : 'p-5'}`}>
+                  <div className="space-y-1">
+                    <span className="text-[9px] font-bold text-[#1D4ED8] uppercase tracking-wider">
+                      Profil & Statistik
+                    </span>
+                    <h2 className="text-sm font-extrabold text-gray-900">
+                      {aboutForm.title || 'Tentang Brown Smart Education Center'}
+                    </h2>
+                    <p className="text-[10px] text-gray-500 leading-relaxed">
+                      {aboutForm.subtitle || 'Lembaga Bimbingan Belajar Terpercaya di Indonesia'}
+                    </p>
+                  </div>
+
+                  {/* 4 Stat Cards Grid: Desktop = 4 Cols or 2 Cols */}
+                  <div className={`grid gap-2 ${deviceMode === 'desktop' ? 'grid-cols-4' : 'grid-cols-2'}`}>
+                    <div className="bg-[#1D4ED8] text-white p-2 rounded-xl shadow-xs">
+                      <span className="font-extrabold block text-sm leading-none mb-1">
+                        {aboutForm.statCard1Number || '10+'}
+                      </span>
+                      <span className="text-[7px] uppercase tracking-wider font-semibold opacity-90 block">
+                        {aboutForm.statCard1Label || 'TAHUN PENGALAMAN'}
+                      </span>
+                    </div>
+                    <div className="bg-[#EFF6FF] text-[#1E293B] p-2 rounded-xl border border-blue-100">
+                      <span className="font-extrabold block text-sm leading-none mb-1 text-[#1D4ED8]">
+                        {aboutForm.statCard2Number || '500+'}
+                      </span>
+                      <span className="text-[7px] uppercase tracking-wider font-semibold text-gray-500 block">
+                        {aboutForm.statCard2Label || 'SISWA BERPRESTASI'}
+                      </span>
+                    </div>
+                    <div className="bg-[#EFF6FF] text-[#1E293B] p-2 rounded-xl border border-blue-100">
+                      <span className="font-extrabold block text-sm leading-none mb-1 text-[#1D4ED8]">
+                        {aboutForm.statCard3Number || '95%'}
+                      </span>
+                      <span className="text-[7px] uppercase tracking-wider font-semibold text-gray-500 block">
+                        {aboutForm.statCard3Label || 'KEPUASAN SISWA'}
+                      </span>
+                    </div>
+                    <div className="bg-[#1E293B] text-white p-2 rounded-xl">
+                      <span className="font-extrabold block text-sm leading-none mb-1">
+                        {aboutForm.statCard4Number || '2014'}
+                      </span>
+                      <span className="text-[7px] uppercase tracking-wider font-semibold text-gray-300 block">
+                        {aboutForm.statCard4Label || 'TAHUN BERDIRI'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {aboutForm.visionText && (
+                    <div className="pt-2 border-t border-gray-100">
+                      <span className="text-[9px] font-bold text-[#1D4ED8] uppercase block mb-0.5">Visi Utama</span>
+                      <p className="text-[10px] text-gray-600 italic leading-relaxed">&quot;{aboutForm.visionText}&quot;</p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* TAB 3: PROGRAMS PREVIEW */}
               {activeTab === 'Programs' && (
                 <div className={`p-4 bg-gray-50/50 space-y-3 ${deviceMode === 'mobile' ? 'p-3' : 'p-5'}`}>
                   <div className="text-center space-y-1">
@@ -345,131 +405,45 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
                 </div>
               )}
 
-              {/* TAB 3: TESTIMONIALS PREVIEW */}
-              {activeTab === 'Testimonials' && (
-                <div className={`p-4 bg-[#1D4ED8] text-white space-y-3 ${deviceMode === 'mobile' ? 'p-3' : 'p-5'}`}>
-                  <div className="text-center space-y-1">
-                    <span className="text-[9px] font-bold text-blue-200 uppercase tracking-wider">
-                      Testimoni Siswa
-                    </span>
-                    <h2 className="text-sm font-extrabold text-white">
-                      {testimonialsTitle}
-                    </h2>
-                  </div>
-
-                  {/* Testimonials Grid: Desktop = 2 Cols; Tablet/Mobile = 1 Col */}
-                  <div className={`grid gap-2.5 ${deviceMode === 'desktop' ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                    {testimonials.filter((t) => t.isActive).length > 0 ? (
-                      testimonials
-                        .filter((t) => t.isActive)
-                        .slice(0, 4)
-                        .map((item) => (
-                          <div
-                            key={item.id}
-                            className="bg-white/10 backdrop-blur-xs p-3 rounded-xl border border-white/20 space-y-2"
-                          >
-                            <div className="flex items-center gap-2">
-                              <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center font-bold text-white text-[10px] border border-white/30 shrink-0">
-                                {item.avatarInitials || 'BS'}
-                              </div>
-                              <div className="min-w-0">
-                                <h4 className="text-xs font-bold truncate text-white">
-                                  {item.studentName}
-                                </h4>
-                                <span className="text-[9px] text-emerald-300 font-semibold block truncate">
-                                  Lolos {item.targetPtnPassed}
-                                </span>
-                              </div>
-                            </div>
-                            <p className="text-[10px] italic text-blue-50 line-clamp-3 leading-relaxed">
-                              &quot;{item.contentSnippet}&quot;
-                            </p>
-                          </div>
-                        ))
-                    ) : (
-                      <div className="col-span-full text-center py-6 text-blue-200 text-[10px]">
-                        Belum ada testimoni aktif disetujui.
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
-
-              {/* TAB 4: ABOUT & ADVANTAGES PREVIEW */}
-              {activeTab === 'About & Advantages' && (
+              {/* TAB 4: ADVANTAGES PREVIEW */}
+              {activeTab === 'Advantages' && (
                 <div className={`p-4 bg-white space-y-3 ${deviceMode === 'mobile' ? 'p-3' : 'p-5'}`}>
                   <div className="space-y-1">
                     <span className="text-[9px] font-bold text-[#1D4ED8] uppercase tracking-wider">
-                      Profil & Statistik
+                      Keunggulan BSEC
                     </span>
                     <h2 className="text-sm font-extrabold text-gray-900">
-                      {aboutForm.title || 'Tentang Brown Smart Education Center'}
+                      {advantagesTitle}
                     </h2>
                     <p className="text-[10px] text-gray-500 leading-relaxed">
-                      {aboutForm.subtitle || 'Lembaga Bimbingan Belajar Terpercaya di Indonesia'}
+                      {advantagesSubtitle}
                     </p>
                   </div>
 
-                  {/* 4 Stat Cards Grid: Desktop = 4 Cols or 2 Cols */}
-                  <div className={`grid gap-2 ${deviceMode === 'desktop' ? 'grid-cols-4' : 'grid-cols-2'}`}>
-                    <div className="bg-[#1D4ED8] text-white p-2 rounded-xl shadow-xs">
-                      <span className="font-extrabold block text-sm leading-none mb-1">
-                        {aboutForm.statCard1Number || '10+'}
-                      </span>
-                      <span className="text-[7px] uppercase tracking-wider font-semibold opacity-90 block">
-                        {aboutForm.statCard1Label || 'TAHUN PENGALAMAN'}
-                      </span>
-                    </div>
-                    <div className="bg-[#EFF6FF] text-[#1E293B] p-2 rounded-xl border border-blue-100">
-                      <span className="font-extrabold block text-sm leading-none mb-1 text-[#1D4ED8]">
-                        {aboutForm.statCard2Number || '500+'}
-                      </span>
-                      <span className="text-[7px] uppercase tracking-wider font-semibold text-gray-500 block">
-                        {aboutForm.statCard2Label || 'SISWA BERPRESTASI'}
-                      </span>
-                    </div>
-                    <div className="bg-[#EFF6FF] text-[#1E293B] p-2 rounded-xl border border-blue-100">
-                      <span className="font-extrabold block text-sm leading-none mb-1 text-[#1D4ED8]">
-                        {aboutForm.statCard3Number || '95%'}
-                      </span>
-                      <span className="text-[7px] uppercase tracking-wider font-semibold text-gray-500 block">
-                        {aboutForm.statCard3Label || 'KEPUASAN SISWA'}
-                      </span>
-                    </div>
-                    <div className="bg-[#1E293B] text-white p-2 rounded-xl">
-                      <span className="font-extrabold block text-sm leading-none mb-1">
-                        {aboutForm.statCard4Number || '2014'}
-                      </span>
-                      <span className="text-[7px] uppercase tracking-wider font-semibold text-gray-300 block">
-                        {aboutForm.statCard4Label || 'TAHUN BERDIRI'}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Advantages Sub-section */}
-                  {advantages.length > 0 && (
-                    <div className="pt-2 border-t border-gray-100 space-y-1.5">
-                      <h3 className="text-xs font-bold text-gray-900">
-                        {advantagesTitle}
-                      </h3>
-                      <div className="space-y-1.5">
-                        {advantages.slice(0, 3).map((adv) => (
-                          <div
-                            key={adv.id}
-                            className="bg-gray-50 p-2 rounded-lg border border-gray-100 flex items-start gap-2"
-                          >
-                            <Sparkles className="w-3.5 h-3.5 text-[#1D4ED8] shrink-0 mt-0.5" />
-                            <div>
-                              <h4 className="text-[10px] font-bold text-gray-800">
-                                {adv.title}
-                              </h4>
-                              <p className="text-[9px] text-gray-500 leading-tight">
-                                {adv.description}
-                              </p>
-                            </div>
+                  {advantages.length > 0 ? (
+                    <div className={`grid gap-2.5 pt-1 ${deviceMode === 'desktop' ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                      {advantages.map((adv) => (
+                        <div
+                          key={adv.id}
+                          className="bg-gray-50/80 p-3 rounded-xl border border-gray-200 flex items-start gap-2.5 shadow-2xs"
+                        >
+                          <div className="p-1.5 rounded-lg bg-[#EFF6FF] text-[#1D4ED8] shrink-0">
+                            <Sparkles className="w-4 h-4" />
                           </div>
-                        ))}
-                      </div>
+                          <div>
+                            <h4 className="text-xs font-bold text-gray-900 leading-tight">
+                              {adv.title}
+                            </h4>
+                            <p className="text-[10px] text-gray-500 mt-1 leading-relaxed">
+                              {adv.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-6 text-gray-400 text-[10px]">
+                      Belum ada poin keunggulan ditambahkan.
                     </div>
                   )}
                 </div>
