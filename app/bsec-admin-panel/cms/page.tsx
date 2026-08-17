@@ -51,6 +51,7 @@ export default function CmsLandingPage() {
     deleteProgramCategory,
     programs,
     addProgramItem,
+    updateProgramItem,
     deleteProgramItem,
     toggleProgramItem,
     testimonials,
@@ -245,6 +246,7 @@ export default function CmsLandingPage() {
                   updateProgramCategory={updateProgramCategory}
                   deleteProgramCategory={deleteProgramCategory}
                   programs={programs}
+                  updateProgramItem={updateProgramItem}
                   toggleProgramItem={toggleProgramItem}
                   deleteProgramItem={deleteProgramItem}
                   onOpenAddCategoryModal={() => setShowAddCategoryModal(true)}
