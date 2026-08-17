@@ -13,6 +13,7 @@ interface ProgramsTabProps {
   updateProgramCategory?: (id: string, name: string) => void;
   deleteProgramCategory: (id: string) => void;
   programs: ProgramCmsItem[];
+  updateProgramItem?: (id: string, updated: Partial<ProgramCmsItem>) => void;
   toggleProgramItem: (id: string) => void;
   deleteProgramItem: (id: string) => void;
   onOpenAddCategoryModal: () => void;
@@ -30,6 +31,7 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
   updateProgramCategory,
   deleteProgramCategory,
   programs,
+  updateProgramItem,
   toggleProgramItem,
   deleteProgramItem,
   onOpenAddCategoryModal,
@@ -37,6 +39,14 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
 }) => {
   const [editingCatId, setEditingCatId] = useState<string | null>(null);
   const [editingCatName, setEditingCatName] = useState<string>('');
+
+  const [editingProductId, setEditingProductId] = useState<string | null>(null);
+  const [editProductForm, setEditProductForm] = useState<{
+    title: string;
+    description: string;
+    priceFormatted: string;
+    targetAge: string;
+  }>({ title: '', description: '', priceFormatted: '', targetAge: '' });
 
   const currentCategoryName =
     programCategories.find((c) => c.id === selectedCategoryId)?.name || selectedCategoryId;
@@ -52,6 +62,28 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
       updateProgramCategory(id, editingCatName.trim());
     }
     setEditingCatId(null);
+  };
+
+  const handleStartEditProduct = (product: ProgramCmsItem) => {
+    setEditingProductId(product.id);
+    setEditProductForm({
+      title: product.title,
+      description: product.description,
+      priceFormatted: product.priceFormatted,
+      targetAge: product.targetAge || '',
+    });
+  };
+
+  const handleSaveEditProduct = (id: string) => {
+    if (updateProgramItem && editProductForm.title.trim()) {
+      updateProgramItem(id, {
+        title: editProductForm.title,
+        description: editProductForm.description,
+        priceFormatted: editProductForm.priceFormatted,
+        targetAge: editProductForm.targetAge,
+      });
+    }
+    setEditingProductId(null);
   };
 
   return (
@@ -208,37 +240,144 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
             </p>
           </div>
         ) : (
-          filteredPrograms.map((product) => (
-            <div
-              key={product.id}
-              className="p-4 bg-gray-50/80 rounded-xl border border-gray-200 flex items-center justify-between gap-4 hover:border-gray-300 transition-colors"
-            >
-              <div>
-                <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-gray-900">{product.title}</span>
-                  <span className="text-[10px] font-bold text-[#1D4ED8] bg-[#EFF6FF] px-2 py-0.5 rounded">
-                    {product.priceFormatted}
+          filteredPrograms.map((product) =>
+            editingProductId === product.id ? (
+              <div
+                key={product.id}
+                className="p-4 bg-white rounded-xl border-2 border-[#1D4ED8] shadow-md space-y-3"
+              >
+                <div className="flex items-center justify-between border-b border-gray-100 pb-2">
+                  <span className="text-xs font-bold text-[#1D4ED8]">
+                    Edit Produk Kelas
                   </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => handleSaveEditProduct(product.id)}
+                      className="bg-[#1D4ED8] text-white px-3 py-1 rounded-lg text-xs font-bold hover:bg-blue-700 transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <Check className="w-3.5 h-3.5" />
+                      <span>Simpan</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setEditingProductId(null)}
+                      className="bg-gray-100 text-gray-600 px-3 py-1 rounded-lg text-xs font-bold hover:bg-gray-200 transition-colors cursor-pointer flex items-center gap-1"
+                    >
+                      <X className="w-3.5 h-3.5" />
+                      <span>Batal</span>
+                    </button>
+                  </div>
                 </div>
-                <p className="text-[11px] text-gray-500 mt-1">{product.description}</p>
-              </div>
 
-              <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  checked={product.isActive}
-                  onChange={() => toggleProgramItem(product.id)}
-                  className="w-4 h-4 text-[#1D4ED8] rounded border-gray-300 cursor-pointer"
-                />
-                <button
-                  onClick={() => deleteProgramItem(product.id)}
-                  className="p-1 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 mb-1">
+                      Nama Produk Kelas
+                    </label>
+                    <input
+                      type="text"
+                      value={editProductForm.title}
+                      onChange={(e) =>
+                        setEditProductForm((prev) => ({ ...prev, title: e.target.value }))
+                      }
+                      className="w-full bg-gray-50 text-xs font-bold p-2 rounded-lg border border-gray-300"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 mb-1">
+                      Harga (Formatted)
+                    </label>
+                    <input
+                      type="text"
+                      value={editProductForm.priceFormatted}
+                      onChange={(e) =>
+                        setEditProductForm((prev) => ({ ...prev, priceFormatted: e.target.value }))
+                      }
+                      className="w-full bg-gray-50 text-xs font-bold p-2 rounded-lg border border-gray-300"
+                      placeholder="e.g. Rp 450k/bln"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 mb-1">
+                      Target Jenjang / Usia
+                    </label>
+                    <input
+                      type="text"
+                      value={editProductForm.targetAge}
+                      onChange={(e) =>
+                        setEditProductForm((prev) => ({ ...prev, targetAge: e.target.value }))
+                      }
+                      className="w-full bg-gray-50 text-xs p-2 rounded-lg border border-gray-300"
+                      placeholder="e.g. Kelas 1-6 SD"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-[10px] font-bold text-gray-500 mb-1">
+                      Deskripsi Singkat
+                    </label>
+                    <input
+                      type="text"
+                      value={editProductForm.description}
+                      onChange={(e) =>
+                        setEditProductForm((prev) => ({ ...prev, description: e.target.value }))
+                      }
+                      className="w-full bg-gray-50 text-xs p-2 rounded-lg border border-gray-300"
+                    />
+                  </div>
+                </div>
               </div>
-            </div>
-          ))
+            ) : (
+              <div
+                key={product.id}
+                className="p-4 bg-gray-50/80 rounded-xl border border-gray-200 flex items-center justify-between gap-4 hover:border-gray-300 transition-colors"
+              >
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold text-gray-900">{product.title}</span>
+                    <span className="text-[10px] font-bold text-[#1D4ED8] bg-[#EFF6FF] px-2 py-0.5 rounded">
+                      {product.priceFormatted}
+                    </span>
+                    {product.targetAge && (
+                      <span className="text-[10px] text-gray-500 bg-gray-200/60 px-2 py-0.5 rounded font-medium">
+                        {product.targetAge}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-[11px] text-gray-500 mt-1">{product.description}</p>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleStartEditProduct(product)}
+                    className="p-1.5 text-gray-400 hover:text-[#1D4ED8] hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                    title="Edit Produk"
+                  >
+                    <Pencil className="w-3.5 h-3.5" />
+                  </button>
+                  <input
+                    type="checkbox"
+                    checked={product.isActive}
+                    onChange={() => toggleProgramItem(product.id)}
+                    className="w-4 h-4 text-[#1D4ED8] rounded border-gray-300 cursor-pointer"
+                  />
+                  <button
+                    onClick={() => deleteProgramItem(product.id)}
+                    className="p-1 text-gray-400 hover:text-red-600 transition-colors cursor-pointer"
+                    title="Hapus Produk"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )
+          )
         )}
       </div>
     </div>
