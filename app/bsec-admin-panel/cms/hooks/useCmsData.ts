@@ -218,12 +218,17 @@ export function useCmsData() {
   // Program Category CRUD Handlers
   const addProgramCategory = (name: string) => {
     const newId = name.toLowerCase().replace(/\s+/g, '-');
-    const newCat: ProgramCategory = {
-      id: newId,
-      name,
-      sortOrder: programCategories.length + 1,
-    };
-    setProgramCategories((prev) => [...prev, newCat]);
+    setProgramCategories((prev) => {
+      const updated = [
+        ...prev,
+        {
+          id: newId,
+          name,
+          sortOrder: prev.length + 1,
+        },
+      ];
+      return updated.map((cat, idx) => ({ ...cat, sortOrder: idx + 1 }));
+    });
   };
 
   const updateProgramCategory = (id: string, name: string) => {
@@ -233,8 +238,22 @@ export function useCmsData() {
   };
 
   const deleteProgramCategory = (id: string) => {
-    setProgramCategories((prev) => prev.filter((c) => c.id !== id));
+    setProgramCategories((prev) => {
+      const filtered = prev.filter((c) => c.id !== id);
+      return filtered.map((cat, idx) => ({ ...cat, sortOrder: idx + 1 }));
+    });
     setPrograms((prev) => prev.filter((p) => p.categoryId !== id));
+  };
+
+  const moveProgramCategory = (index: number, direction: 'left' | 'right') => {
+    setProgramCategories((prev) => {
+      const targetIndex = direction === 'left' ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= prev.length) return prev;
+      const updated = [...prev];
+      const [moved] = updated.splice(index, 1);
+      updated.splice(targetIndex, 0, moved);
+      return updated.map((cat, idx) => ({ ...cat, sortOrder: idx + 1 }));
+    });
   };
 
   // Child Product CRUD Handlers
@@ -325,7 +344,7 @@ const ADVANTAGE_PRESET_ICONS = [
 
     const payload = {
       hero: heroForm,
-      programCategories,
+      programCategories: programCategories.map((c, idx) => ({ ...c, sortOrder: idx + 1 })),
       programs,
       testimonials,
       about: aboutForm,
@@ -383,6 +402,7 @@ const ADVANTAGE_PRESET_ICONS = [
     addProgramCategory,
     updateProgramCategory,
     deleteProgramCategory,
+    moveProgramCategory,
     programs,
     addProgramItem,
     updateProgramItem,
