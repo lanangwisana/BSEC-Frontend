@@ -1,11 +1,12 @@
 import React from 'react'
-import { LeadCaptureCmsContent } from '@/app/bsec-admin-panel/cms/types'
+import { LeadCaptureCmsContent, ProgramCmsItem } from '@/app/bsec-admin-panel/cms/types'
 
 interface CTAProps {
   data?: LeadCaptureCmsContent
+  programs?: ProgramCmsItem[]
 }
 
-const CTA: React.FC<CTAProps> = ({ data }) => {
+const CTA: React.FC<CTAProps> = ({ data, programs }) => {
   const title = data?.title || 'Mulai Perjalanan Prestasimu Sekarang'
   const subtitle = data?.subtitle || 'Dapatkan jadwal konsultasi gratis dan rancang strategi belajar terbaik bersama tim ahli kami.'
   const checklist = data?.checklistItems || [
@@ -13,6 +14,10 @@ const CTA: React.FC<CTAProps> = ({ data }) => {
     'Laporan Progres Belajar Real-time',
     'Akses Bank Soal Terlengkap',
   ]
+
+  const activePrograms = programs
+    ? programs.filter((p) => p.isActive)
+    : []
 
   return (
     <section className="py-24 relative" id="daftar">
@@ -50,13 +55,23 @@ const CTA: React.FC<CTAProps> = ({ data }) => {
                 </div>
                 <div>
                   <label className="block text-xs font-black text-[#1E293B] mb-2 uppercase tracking-widest">
-                    Jenjang Pendidikan
+                    Jenjang / Program Bimbingan
                   </label>
-                  <select className="w-full border-2 border-gray-200 rounded-2xl focus:ring-[#1D4ED8] focus:border-[#1D4ED8] px-5 py-3.5 bg-[#EFF6FF]/70 text-xs font-semibold text-[#1E293B] transition-all">
-                    <option>SD</option>
-                    <option>SMP</option>
-                    <option>SMA</option>
-                    <option>Lulus SMA (Gap Year)</option>
+                  <select className="w-full border-2 border-gray-200 rounded-2xl focus:ring-[#1D4ED8] focus:border-[#1D4ED8] px-5 py-3.5 bg-[#EFF6FF]/70 text-xs font-semibold text-[#1E293B] transition-all cursor-pointer">
+                    <option value="">-- Pilih Program Bimbingan --</option>
+                    {activePrograms.length > 0 ? (
+                      activePrograms.map((program) => (
+                        <option key={program.id} value={program.id}>
+                          {program.title}
+                        </option>
+                      ))
+                    ) : (
+                      <>
+                        <option value="sd">Program SD</option>
+                        <option value="smp">Program SMP</option>
+                        <option value="sma">Program SMA</option>
+                      </>
+                    )}
                   </select>
                 </div>
                 <div>
