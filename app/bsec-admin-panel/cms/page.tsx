@@ -49,6 +49,7 @@ export default function CmsLandingPage() {
     addProgramCategory,
     updateProgramCategory,
     deleteProgramCategory,
+    moveProgramCategory,
     programs,
     addProgramItem,
     updateProgramItem,
@@ -250,6 +251,7 @@ export default function CmsLandingPage() {
                   setSelectedCategoryId={setSelectedCategoryId}
                   updateProgramCategory={updateProgramCategory}
                   deleteProgramCategory={deleteProgramCategory}
+                  moveProgramCategory={moveProgramCategory}
                   programs={programs}
                   updateProgramItem={updateProgramItem}
                   toggleProgramItem={toggleProgramItem}
