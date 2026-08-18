@@ -2,6 +2,8 @@ import React from 'react'
 import { AdvantageCmsItem } from '@/app/bsec-admin-panel/cms/types'
 
 interface AdvantagesProps {
+  title?: string
+  subtitle?: string
   data?: AdvantageCmsItem[]
 }
 
@@ -19,7 +21,7 @@ const defaultAdvantages = [
   { id: 'monitoring', title: 'Monitoring Perkembangan', description: 'Laporan perkembangan belajar siswa setiap bulan untuk orang tua.', iconName: 'groups' },
 ]
 
-const Advantages: React.FC<AdvantagesProps> = ({ data }) => {
+const Advantages: React.FC<AdvantagesProps> = ({ title, subtitle, data }) => {
   const currentList = data && data.length > 0 ? data : defaultAdvantages
 
   return (
@@ -27,10 +29,10 @@ const Advantages: React.FC<AdvantagesProps> = ({ data }) => {
       <div className="max-w-[1280px] mx-auto px-6 py-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl text-[#1E293B] mb-3 uppercase tracking-[0.2em] font-black">
-            MENGAPA BSEC?
+            {title || 'MENGAPA BSEC?'}
           </h2>
           <p className="text-lg text-gray-600 font-medium">
-            Dedikasi kami untuk masa depan cerah anak Anda
+            {subtitle || 'Dedikasi kami untuk masa depan cerah anak Anda'}
           </p>
         </div>
         
