@@ -58,9 +58,11 @@ export const TestimonialsTab: React.FC<TestimonialsTabProps> = ({
               </div>
               <div>
                 <span className="text-xs font-bold text-gray-900">{t.studentName}</span>
-                <span className="ml-2 text-[10px] font-extrabold bg-purple-100 text-purple-700 px-2 py-0.5 rounded">
-                  {t.targetPtnPassed}
-                </span>
+                {t.targetPtnPassed && (
+                  <span className="ml-2 text-[10px] font-extrabold bg-purple-100 text-purple-700 px-2 py-0.5 rounded">
+                    {t.targetPtnPassed}
+                  </span>
+                )}
                 <p className="text-[11px] text-gray-500 italic mt-0.5">{t.contentSnippet}</p>
               </div>
             </div>
