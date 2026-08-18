@@ -283,10 +283,25 @@ export function useCmsData() {
     );
   };
 
+const ADVANTAGE_PRESET_ICONS = [
+  'school',
+  'map',
+  'rocket_launch',
+  'groups',
+  'star',
+  'workspace_premium',
+  'psychology',
+  'verified',
+  'auto_awesome',
+  'menu_book',
+];
+
   // Advantages CRUD Handlers
   const addAdvantage = (item: Omit<AdvantageCmsItem, 'id' | 'sortOrder'>) => {
+    const randomIcon = ADVANTAGE_PRESET_ICONS[Math.floor(Math.random() * ADVANTAGE_PRESET_ICONS.length)];
     const newItem: AdvantageCmsItem = {
       ...item,
+      iconName: (!item.iconName || item.iconName === 'star') ? randomIcon : item.iconName,
       id: `a-${Date.now()}`,
       sortOrder: advantages.length + 1,
     };
@@ -295,6 +310,12 @@ export function useCmsData() {
 
   const deleteAdvantage = (id: string) => {
     setAdvantages((prev) => prev.filter((a) => a.id !== id));
+  };
+
+  const updateAdvantage = (id: string, updated: Partial<AdvantageCmsItem>) => {
+    setAdvantages((prev) =>
+      prev.map((a) => (a.id === id ? { ...a, ...updated } : a))
+    );
   };
 
   // Save / Publish All CMS Draft Changes to Laravel Backend
@@ -375,6 +396,7 @@ export function useCmsData() {
     handleAboutChange,
     advantages,
     addAdvantage,
+    updateAdvantage,
     deleteAdvantage,
     leadCaptureForm,
     handleLeadCaptureChange,
