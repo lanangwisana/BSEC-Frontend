@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { resolveMediaUrl } from '@/app/bsec-landingpage/lib/media';
 import {
   Monitor,
   Tablet,
@@ -231,7 +232,7 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
                           : 'h-[170px]'
                       }`}>
                         <img
-                          src={heroForm.assetMediaUrl || '/images/image 1.png'}
+                          src={resolveMediaUrl(heroForm.assetMediaUrl) || '/images/image 1.png'}
                           alt="Hero Student Portrait"
                           className={`w-full h-full object-cover ${
                             (heroForm.assetMediaPosition || '').startsWith('object-')

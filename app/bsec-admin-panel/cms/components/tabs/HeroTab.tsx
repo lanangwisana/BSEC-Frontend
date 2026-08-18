@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { Eye, X, Move } from 'lucide-react';
 import { HeroSectionContent } from '../../types';
+import { resolveMediaUrl } from '@/app/bsec-landingpage/lib/media';
 
 interface HeroTabProps {
   heroForm: HeroSectionContent;
@@ -252,7 +253,7 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
             {/* Thumbnail Preview with Full Modal Trigger */}
             <div className="relative w-full rounded-xl overflow-hidden border border-gray-200 bg-gray-100 group">
               <img
-                src={heroForm.assetMediaUrl}
+                src={resolveMediaUrl(heroForm.assetMediaUrl)}
                 alt="Hero image preview"
                 className={`w-full max-h-48 object-cover ${
                   (heroForm.assetMediaPosition || '').startsWith('object-')
@@ -304,7 +305,7 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
                 </span>
                 <div className="rounded-xl border border-gray-200 bg-gray-900 flex items-center justify-center p-2 min-h-[220px]">
                   <img
-                    src={heroForm.assetMediaUrl}
+                    src={resolveMediaUrl(heroForm.assetMediaUrl)}
                     alt="Original full resolution"
                     className="max-h-[300px] w-auto object-contain rounded-lg shadow-md"
                   />
@@ -346,7 +347,7 @@ export const HeroTab: React.FC<HeroTabProps> = ({ heroForm, handleHeroChange }) 
                   }`}
                 >
                   <img
-                    src={heroForm.assetMediaUrl}
+                    src={resolveMediaUrl(heroForm.assetMediaUrl)}
                     alt="Cropped hero preview"
                     className={`w-full h-full object-cover pointer-events-none ${
                       (heroForm.assetMediaPosition || '').startsWith('object-')

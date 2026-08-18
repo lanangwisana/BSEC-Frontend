@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Upload, Loader2, Trash2 } from 'lucide-react';
+import { resolveMediaUrl } from '@/app/bsec-landingpage/lib/media';
 
 interface AddTestimonialModalProps {
   isOpen: boolean;
@@ -116,7 +117,7 @@ export const AddTestimonialModal: React.FC<AddTestimonialModalProps> = ({
             {testimonialForm.avatarUrl ? (
               <div className="flex items-center gap-3 bg-gray-50 p-2.5 rounded-xl border border-gray-200">
                 <img
-                  src={testimonialForm.avatarUrl}
+                  src={resolveMediaUrl(testimonialForm.avatarUrl)}
                   alt="Avatar Preview"
                   className="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-xs"
                 />

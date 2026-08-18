@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 import { HeroSectionContent } from '@/app/bsec-admin-panel/cms/types'
+import { resolveMediaUrl } from '@/app/bsec-landingpage/lib/media'
 
 interface HeroProps {
   data?: HeroSectionContent
@@ -16,7 +17,7 @@ const Hero: React.FC<HeroProps> = ({ data }) => {
   const ctaRedirectUrl = data?.ctaRedirectUrl || '#daftar'
   const ctaSecondaryLabel = data?.ctaSecondaryLabel || 'Tanya via WhatsApp'
   const ctaSecondaryUrl = data?.ctaSecondaryUrl || 'https://wa.me/6281234567890'
-  const mediaUrl = data?.assetMediaUrl || '/images/image 1.png'
+  const mediaUrl = resolveMediaUrl(data?.assetMediaUrl) || '/images/image 1.png'
   const mediaPosition = data?.assetMediaPosition || '50% 15%'
   const floatingText = data?.floatingBadgeText || '500+ Siswa Lolos'
   const floatingSubtext = data?.floatingBadgeSubtext || 'Pengajar PTN favorit berpengalaman.'

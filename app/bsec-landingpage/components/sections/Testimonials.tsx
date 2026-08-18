@@ -1,5 +1,6 @@
 import React from 'react'
 import { TestimonialRosterItem } from '@/app/bsec-admin-panel/cms/types'
+import { resolveMediaUrl } from '@/app/bsec-landingpage/lib/media'
 
 interface TestimonialsProps {
   title?: string
@@ -57,7 +58,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({ title, data }) => {
           name: item.studentName,
           role: roleString,
           content: `"${item.contentSnippet}"`,
-          avatarUrl: item.avatarUrl || null,
+          avatarUrl: item.avatarUrl ? resolveMediaUrl(item.avatarUrl) : null,
           avatarInitials: item.avatarInitials || getInitials(item.studentName),
         }
       })
