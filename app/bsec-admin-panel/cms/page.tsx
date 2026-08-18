@@ -62,6 +62,7 @@ export default function CmsLandingPage() {
     handleAboutChange,
     advantages,
     addAdvantage,
+    updateAdvantage,
     deleteAdvantage,
     leadCaptureForm,
     handleLeadCaptureChange,
@@ -163,9 +164,9 @@ export default function CmsLandingPage() {
     addAdvantage({
       title: advantageForm.title,
       description: advantageForm.description,
-      iconName: advantageForm.iconName || 'star',
+      iconName: advantageForm.iconName,
     });
-    setAdvantageForm({ title: '', description: '', iconName: 'star' });
+    setAdvantageForm({ title: '', description: '', iconName: '' });
     setShowAddAdvantageModal(false);
   };
 
@@ -265,6 +266,7 @@ export default function CmsLandingPage() {
                   advantagesSubtitle={advantagesSubtitle}
                   setAdvantagesSubtitle={setAdvantagesSubtitle}
                   advantages={advantages}
+                  updateAdvantage={updateAdvantage}
                   deleteAdvantage={deleteAdvantage}
                   onOpenAddAdvantageModal={() => setShowAddAdvantageModal(true)}
                 />
