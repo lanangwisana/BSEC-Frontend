@@ -35,7 +35,7 @@ export default async function LandingPage() {
       <Programs categories={data?.programCategories} data={data?.programs} />
       <Advantages title={data?.advantagesTitle} subtitle={data?.advantagesSubtitle} data={data?.advantages} />
       <Testimonials title={data?.testimonialsTitle} data={data?.testimonials} />
-      <CTA data={data?.leadCapture} />
+      <CTA data={data?.leadCapture} programs={data?.programs} />
       <Footer data={data?.footer} />
     </main>
   );
