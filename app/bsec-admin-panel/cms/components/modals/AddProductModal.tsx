@@ -77,14 +77,13 @@ export const AddProductModal: React.FC<AddProductModalProps> = ({
 
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-[11px] font-bold text-gray-600 mb-1">Harga (Formatted)</label>
+              <label className="block text-[11px] font-bold text-gray-600 mb-1">Harga (Formatted - Opsional)</label>
               <input
                 type="text"
-                placeholder="Rp 450k/bln"
+                placeholder="Rp 450k/bln (Opsional)"
                 value={productForm.priceFormatted}
                 onChange={(e) => setProductForm({ ...productForm, priceFormatted: e.target.value })}
-                className="w-full bg-gray-50 text-xs p-2.5 rounded-xl border border-gray-200"
-                required
+                className="w-full bg-gray-50 text-xs p-2.5 rounded-xl border border-gray-200 font-medium"
               />
             </div>
             <div>

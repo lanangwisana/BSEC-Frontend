@@ -406,9 +406,11 @@ export const LivePreviewPanel: React.FC<LivePreviewPanelProps> = ({
                             </p>
                           </div>
                           <div className="pt-2 border-t border-gray-100 flex items-center justify-between">
-                            <span className="text-xs font-black text-[#1D4ED8]">
-                              {item.priceFormatted}
-                            </span>
+                            {item.priceFormatted ? (
+                               <span className="text-xs font-black text-[#1D4ED8]">
+                                 {item.priceFormatted}
+                               </span>
+                             ) : <span />}
                             <span className="bg-[#1D4ED8] text-white px-2 py-0.5 rounded-lg text-[9px] font-bold">
                               Pilih
                             </span>

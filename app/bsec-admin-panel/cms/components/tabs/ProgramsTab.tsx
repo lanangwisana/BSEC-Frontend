@@ -80,7 +80,7 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
     setEditProductForm({
       title: product.title,
       description: product.description,
-      priceFormatted: product.priceFormatted,
+      priceFormatted: product.priceFormatted || '',
       targetAge: product.targetAge || '',
       learningObjectives: product.learningObjectives || '',
       learningFocus: product.learningFocus || '',
@@ -420,9 +420,11 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
                 <div>
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold text-gray-900">{product.title}</span>
-                    <span className="text-[10px] font-bold text-[#1D4ED8] bg-[#EFF6FF] px-2 py-0.5 rounded">
-                      {product.priceFormatted}
-                    </span>
+                    {product.priceFormatted && (
+                      <span className="text-[10px] font-bold text-[#1D4ED8] bg-[#EFF6FF] px-2 py-0.5 rounded">
+                        {product.priceFormatted}
+                      </span>
+                    )}
                     {product.targetAge && (
                       <span className="text-[10px] text-gray-500 bg-gray-200/60 px-2 py-0.5 rounded font-medium">
                         {product.targetAge}

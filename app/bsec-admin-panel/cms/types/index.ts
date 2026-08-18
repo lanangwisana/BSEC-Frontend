@@ -37,7 +37,7 @@ export interface ProgramCmsItem {
   categoryId: string;
   title: string;
   description: string;
-  priceFormatted: string;
+  priceFormatted?: string | null;
   iconName: string;
   targetAge?: string;
   learningObjectives?: string;

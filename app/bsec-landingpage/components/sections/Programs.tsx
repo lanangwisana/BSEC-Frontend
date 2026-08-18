@@ -104,7 +104,7 @@ const Programs: React.FC<ProgramsProps> = ({ categories, data }) => {
                 <h4 className="text-2xl mb-4 font-black text-[#1E293B]">{item.title}</h4>
                 <p className="text-gray-600 mb-10 flex-grow leading-relaxed font-medium">{item.desc}</p>
                 <div className="flex flex-col gap-3 mt-auto">
-                  <span className="text-2xl font-black text-[#1D4ED8] mb-1">{item.price}</span>
+                  {item.price && <span className="text-2xl font-black text-[#1D4ED8] mb-1">{item.price}</span>}
                   
                   <div className="flex flex-col gap-2.5 pt-1">
                     <Link 
