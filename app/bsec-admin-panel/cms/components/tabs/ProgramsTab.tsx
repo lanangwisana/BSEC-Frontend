@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layers, Plus, Trash2, Pencil, Check, X } from 'lucide-react';
+import { Layers, Plus, Trash2, Pencil, Check, X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ProgramCategory, ProgramCmsItem } from '../../types';
 
 interface ProgramsTabProps {
@@ -12,6 +12,7 @@ interface ProgramsTabProps {
   setSelectedCategoryId: (id: string) => void;
   updateProgramCategory?: (id: string, name: string) => void;
   deleteProgramCategory: (id: string) => void;
+  moveProgramCategory?: (index: number, direction: 'left' | 'right') => void;
   programs: ProgramCmsItem[];
   updateProgramItem?: (id: string, updated: Partial<ProgramCmsItem>) => void;
   toggleProgramItem: (id: string) => void;
@@ -30,6 +31,7 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
   setSelectedCategoryId,
   updateProgramCategory,
   deleteProgramCategory,
+  moveProgramCategory,
   programs,
   updateProgramItem,
   toggleProgramItem,
@@ -141,7 +143,7 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
       </div>
 
       <div className="flex items-center gap-2 overflow-x-auto pb-2">
-        {programCategories.map((cat) => {
+        {programCategories.map((cat, idx) => {
           const isEditing = editingCatId === cat.id;
           const isSelected = selectedCategoryId === cat.id;
 
@@ -186,12 +188,45 @@ export const ProgramsTab: React.FC<ProgramsTabProps> = ({
                 </div>
               ) : (
                 <>
+                  {moveProgramCategory && idx > 0 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveProgramCategory(idx, 'left');
+                      }}
+                      className={`p-0.5 rounded transition-colors cursor-pointer ${
+                        isSelected ? 'text-blue-200 hover:text-white' : 'text-gray-400 hover:text-gray-700'
+                      }`}
+                      title="Geser Kategori ke Kiri"
+                    >
+                      <ChevronLeft className="w-3 h-3" />
+                    </button>
+                  )}
+
                   <span
                     onClick={() => setSelectedCategoryId(cat.id)}
                     className="cursor-pointer flex-1"
                   >
                     {cat.name}
                   </span>
+
+                  {moveProgramCategory && idx < programCategories.length - 1 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        moveProgramCategory(idx, 'right');
+                      }}
+                      className={`p-0.5 rounded transition-colors cursor-pointer ${
+                        isSelected ? 'text-blue-200 hover:text-white' : 'text-gray-400 hover:text-gray-700'
+                      }`}
+                      title="Geser Kategori ke Kanan"
+                    >
+                      <ChevronRight className="w-3 h-3" />
+                    </button>
+                  )}
+
                   <button
                     type="button"
                     onClick={(e) => {
