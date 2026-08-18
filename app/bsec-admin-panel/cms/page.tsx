@@ -104,12 +104,20 @@ export default function CmsLandingPage() {
     learningObjectives: '',
     learningFocus: '',
   });
-  const [testimonialForm, setTestimonialForm] = useState({
+  const [testimonialForm, setTestimonialForm] = useState<{
+    studentName: string;
+    targetPtnPassed: string;
+    contentSnippet: string;
+    studentClass: string;
+    avatarInitials: string;
+    avatarUrl?: string;
+  }>({
     studentName: '',
     targetPtnPassed: '',
     contentSnippet: '',
-    studentClass: 'Class of 2024',
-    avatarInitials: 'BS',
+    studentClass: '',
+    avatarInitials: '',
+    avatarUrl: '',
   });
   const [advantageForm, setAdvantageForm] = useState({
     title: '',
@@ -128,7 +136,7 @@ export default function CmsLandingPage() {
 
   const handleCreateProduct = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!productForm.title || !productForm.priceFormatted) return;
+    if (!productForm.title || !productForm.description) return;
     addProgramItem({
       categoryId: selectedCategoryId,
       title: productForm.title,
@@ -144,18 +152,26 @@ export default function CmsLandingPage() {
     setShowAddProductModal(false);
   };
 
+  const getInitials = (name: string) => {
+    if (!name || !name.trim()) return 'BS';
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  };
+
   const handleCreateTestimonial = (e: React.FormEvent) => {
     e.preventDefault();
     if (!testimonialForm.studentName || !testimonialForm.contentSnippet) return;
     addTestimonial({
       studentName: testimonialForm.studentName,
-      targetPtnPassed: testimonialForm.targetPtnPassed || 'PTN Target',
+      targetPtnPassed: testimonialForm.targetPtnPassed || '',
       contentSnippet: testimonialForm.contentSnippet,
-      studentClass: testimonialForm.studentClass,
-      avatarInitials: testimonialForm.studentName.substring(0, 2).toUpperCase(),
+      studentClass: testimonialForm.studentClass || '',
+      avatarInitials: getInitials(testimonialForm.studentName),
+      avatarUrl: testimonialForm.avatarUrl || undefined,
       isActive: true,
     });
-    setTestimonialForm({ studentName: '', targetPtnPassed: '', contentSnippet: '', studentClass: 'Class of 2024', avatarInitials: 'BS' });
+    setTestimonialForm({ studentName: '', targetPtnPassed: '', contentSnippet: '', studentClass: '', avatarInitials: '', avatarUrl: '' });
     setShowAddTestimonialModal(false);
   };
 
